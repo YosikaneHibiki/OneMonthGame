@@ -4,6 +4,11 @@ using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
+
+    private IRaceInput raceInput;
+    private Rigidbody playerRB;
+    private CarAction carAction;
+
     public WheelColliders colliders;
     public WheelMeshes wheelMeshes;
     public float gasInput;
@@ -13,17 +18,18 @@ public class CarController : MonoBehaviour
     public float brakePower;
     public float slipAngle;
     public AnimationCurve steeringCurve;
-
-    private Rigidbody playerRB;
-
     public float speed;
     public float maxSpeed;
-    private CarAction carAction;
-
+    
+    public void Inject(IRaceInput raceInput)
+    {
+        this.raceInput = raceInput;
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
+        raceInput.GameRadey();
         carAction = new CarAction();
         carAction.CarActionMap.Brake.performed += OnBrake;
         carAction.CarActionMap.Brake.canceled += OnBrakeCancell;
