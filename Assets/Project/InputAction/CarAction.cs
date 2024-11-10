@@ -71,6 +71,15 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestSystemAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""338f24a2-20c3-4f20-8da4-c59d8acc1c40"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +159,17 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
                     ""action"": ""GearDownAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36fd326a-d808-49a2-822d-bbb11503039b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestSystemAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -163,6 +183,7 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         m_CarActionMap_Brake = m_CarActionMap.FindAction("Brake", throwIfNotFound: true);
         m_CarActionMap_gearUpAction = m_CarActionMap.FindAction("gearUpAction", throwIfNotFound: true);
         m_CarActionMap_GearDownAction = m_CarActionMap.FindAction("GearDownAction", throwIfNotFound: true);
+        m_CarActionMap_TestSystemAction = m_CarActionMap.FindAction("TestSystemAction", throwIfNotFound: true);
     }
 
     ~@CarAction()
@@ -234,6 +255,7 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_CarActionMap_Brake;
     private readonly InputAction m_CarActionMap_gearUpAction;
     private readonly InputAction m_CarActionMap_GearDownAction;
+    private readonly InputAction m_CarActionMap_TestSystemAction;
     public struct CarActionMapActions
     {
         private @CarAction m_Wrapper;
@@ -243,6 +265,7 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         public InputAction @Brake => m_Wrapper.m_CarActionMap_Brake;
         public InputAction @gearUpAction => m_Wrapper.m_CarActionMap_gearUpAction;
         public InputAction @GearDownAction => m_Wrapper.m_CarActionMap_GearDownAction;
+        public InputAction @TestSystemAction => m_Wrapper.m_CarActionMap_TestSystemAction;
         public InputActionMap Get() { return m_Wrapper.m_CarActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,6 +290,9 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
             @GearDownAction.started += instance.OnGearDownAction;
             @GearDownAction.performed += instance.OnGearDownAction;
             @GearDownAction.canceled += instance.OnGearDownAction;
+            @TestSystemAction.started += instance.OnTestSystemAction;
+            @TestSystemAction.performed += instance.OnTestSystemAction;
+            @TestSystemAction.canceled += instance.OnTestSystemAction;
         }
 
         private void UnregisterCallbacks(ICarActionMapActions instance)
@@ -286,6 +312,9 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
             @GearDownAction.started -= instance.OnGearDownAction;
             @GearDownAction.performed -= instance.OnGearDownAction;
             @GearDownAction.canceled -= instance.OnGearDownAction;
+            @TestSystemAction.started -= instance.OnTestSystemAction;
+            @TestSystemAction.performed -= instance.OnTestSystemAction;
+            @TestSystemAction.canceled -= instance.OnTestSystemAction;
         }
 
         public void RemoveCallbacks(ICarActionMapActions instance)
@@ -310,5 +339,6 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         void OnBrake(InputAction.CallbackContext context);
         void OnGearUpAction(InputAction.CallbackContext context);
         void OnGearDownAction(InputAction.CallbackContext context);
+        void OnTestSystemAction(InputAction.CallbackContext context);
     }
 }
