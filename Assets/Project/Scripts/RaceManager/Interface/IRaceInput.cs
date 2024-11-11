@@ -5,5 +5,4 @@ public interface IRaceInput
     public void GameStart();
 
     public void GameEnd();
-
 }

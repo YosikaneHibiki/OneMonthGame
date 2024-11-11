@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe1fb3e642595d4d8f9248c893806b5, type: 3}
+  m_Name: S13
+  m_EditorClassIdentifier: 
+  carID: {fileID: 11400000, guid: 98562e5ec50dae94ca0488b2d9bd854c, type: 2}
+  Name: "S13\u30B7\u30EB\u30D3\u30A2"
+  motorPower: 600
+  brakePower: 3500
+  maxSpeed: 180
+  steeringCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 50.5885
+      inSlope: -0.96360266
+      outSlope: -0.96360266
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 16.971247
+      value: 34.234962
+      inSlope: -0.39384747
+      outSlope: -0.39384747
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 20.897783
+      value: 34.92567
+      inSlope: -0.057837665
+      outSlope: -0.057837665
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 42.230114
+      value: 28.705524
+      inSlope: -0.26571518
+      outSlope: -0.26571518
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 100.59825
+      value: 14.706082
+      inSlope: -0.23984733
+      outSlope: -0.23984733
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Torque: 0.55
+  FrontTorque: 0.45
+  RiaTorque: 0.55

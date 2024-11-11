@@ -11,51 +11,44 @@ public enum GameType
 
 public class CarController : MonoBehaviour
 {
+    [SerializeField]
+    private CarInputController inputController;
+    [SerializeField]
+    private CarID carID;
+    private CarDeta carDeta;
 
-    private IRaceInput raceInput;
-    private Rigidbody playerRB;
-    private CarAction carAction;
-    public GameType gameType;
+    //クルマのデータ
+    public float MaxSpeed { get; private set; }
+    //タイヤのデータ
     public WheelColliders colliders;
     public WheelMeshes wheelMeshes;
-    public float gasInput;
-    public float brakeInput;
-    public float steeringInput;
-    public float motorPower;
-    public float brakePower;
+    //クルマののドメイン
+    private IRaceInput raceInput;
+    private ICarRepository carRepository;
+    public GameType gameType;
+    //現在のクルマの速度や角度
     public float slipAngle;
-    public AnimationCurve steeringCurve;
     public float speed;
-    public float maxSpeed;
+    private Rigidbody playerRB;
     
-    public void Inject(IRaceInput raceInput)
+    public void Inject(IRaceInput raceInput,ICarRepository carRepository)
     {
         this.raceInput = raceInput;
+        this.carRepository = carRepository;
     }
 
     private void Start()
     {
+        carDeta = carRepository.FindCar(carID.Id);
+
+        MaxSpeed = carDeta.maxSpeed;
         raceInput.GameRadey();
-        carAction = new CarAction();
-        carAction.CarActionMap.Brake.performed += OnBrake;
-        carAction.CarActionMap.Brake.canceled += OnBrakeCancell;
-        carAction.CarActionMap.TestSystemAction.performed += OnTestSystem;
-        carAction.CarActionMap.TestSystemAction.canceled += OnTestSystemCancell;
-        carAction.Enable();
         playerRB = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         if(gameType == GameType.Radey) { return; }
-
-        if(gameType == GameType.Goal)
-        {
-            gasInput = 0;
-            steeringInput =0;
-            brakeInput = 5;
-            return;
-        }
 
         speed = playerRB.velocity.magnitude * 3.5f;
         CheckInput();
@@ -67,29 +60,31 @@ public class CarController : MonoBehaviour
 
     private void CheckInput()
     {
-        gasInput = Input.GetAxis("Vertical");
-        steeringInput = Input.GetAxis("Horizontal");
         slipAngle = Vector3.Angle(transform.forward, playerRB.velocity - transform.forward);
     }
 
     private void ApplyBrake()
     {
-        colliders.FRWheel.brakeTorque = brakeInput * brakePower * 0.7f;
-        colliders.FLWheel.brakeTorque = brakeInput * brakePower * 0.7f;
+        colliders.FRWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.7f;
+        colliders.FLWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.7f;
 
-        colliders.RRWheel.brakeTorque = brakeInput * brakePower * 0.3f;
-        colliders.RLWheel.brakeTorque = brakeInput * brakePower * 0.3f;
+        colliders.RRWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.3f;
+        colliders.RLWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.3f;
     }
 
     private void ApplyMotor()
     {
-        colliders.RRWheel.motorTorque = motorPower * gasInput;
-        colliders.RLWheel.motorTorque = motorPower * gasInput;
+
+        colliders.FLWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * inputController.GasInput;
+        colliders.FRWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * inputController.GasInput;
+        colliders.RRWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * inputController.GasInput;
+        colliders.RLWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * inputController.GasInput;
     }
 
     private void ApplySteering()
     {
-        float steeringAngle = steeringInput * steeringCurve.Evaluate(speed);
+        float steeringAngle = inputController.SteeringInput * carDeta.steeringCurve.Evaluate(speed);
+
         if (slipAngle < 120f)
         {
             steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up);
@@ -116,26 +111,6 @@ public class CarController : MonoBehaviour
         wheelMesh.transform.rotation = quat;
     }
 
-    private void OnTestSystem(InputAction.CallbackContext callback)
-    {
-        playerRB.velocity = new Vector3(playerRB.velocity.x, 10);
-    }
-
-    private void OnTestSystemCancell(InputAction.CallbackContext callback)
-    {
-        colliders.FLWheel.motorTorque = 0;
-        colliders.FRWheel.motorTorque = 0;
-    }
-
-    private void OnBrake(InputAction.CallbackContext context)
-    {
-        brakeInput = 1;
-    }
-
-    private void OnBrakeCancell(InputAction.CallbackContext context)
-    {
-        brakeInput = 0;
-    }
 }
 
 [System.Serializable]
