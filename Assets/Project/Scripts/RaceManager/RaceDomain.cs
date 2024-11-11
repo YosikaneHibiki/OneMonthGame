@@ -1,35 +1,35 @@
-using UnityEngine;
-using Cysharp.Threading.Tasks;
-using System;
 using System.Threading;
+using UnityEngine;
 
 public class RaceDomain : IRaceInput
 {
+    private GameType gameType;
     private IRaceOutput output;
 
     private CancellationToken token;
 
-    public RaceDomain(CancellationToken token,IRaceOutput raceOutput)
+    public RaceDomain(CancellationToken token, IRaceOutput raceOutput)
     {
         this.output = raceOutput;
         this.token = token;
     }
 
-    public async void GameRadey()
+    public void GameRadey()
     {
         Debug.Log("Radey");
-        await UniTask.Delay(TimeSpan.FromSeconds(3),cancellationToken: token);
-        GameStart();
+        output.RadeyOutput(token);
     }
 
     public void GameStart()
     {
         Debug.Log("Start");
+        output.StartOutput(token);
     }
 
     public void GameEnd()
     {
         Debug.Log("GameEnd‚©‚©‚Á‚½ŽžŠÔ‚Í");
+        output.GoaleOutput(token);
     }
 
 }

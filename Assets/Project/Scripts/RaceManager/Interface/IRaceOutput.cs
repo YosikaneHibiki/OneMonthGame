@@ -1,6 +1,8 @@
-﻿public interface IRaceOutput
+﻿using System.Threading;
+
+public interface IRaceOutput
 {
-    void RadeyOutput();
-    void StartOutput();
-    void GoaleOutput();
+    void RadeyOutput(CancellationToken token);
+    void StartOutput(CancellationToken token);
+    void GoaleOutput(CancellationToken token);
 }

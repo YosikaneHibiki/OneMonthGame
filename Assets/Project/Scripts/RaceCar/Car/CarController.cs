@@ -2,13 +2,20 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum GameType
+{
+    Radey,
+    Start,
+    Goal
+}
+
 public class CarController : MonoBehaviour
 {
 
     private IRaceInput raceInput;
     private Rigidbody playerRB;
     private CarAction carAction;
-
+    public GameType gameType;
     public WheelColliders colliders;
     public WheelMeshes wheelMeshes;
     public float gasInput;
@@ -26,7 +33,6 @@ public class CarController : MonoBehaviour
         this.raceInput = raceInput;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         raceInput.GameRadey();
@@ -36,12 +42,21 @@ public class CarController : MonoBehaviour
         carAction.CarActionMap.TestSystemAction.performed += OnTestSystem;
         carAction.CarActionMap.TestSystemAction.canceled += OnTestSystemCancell;
         carAction.Enable();
-
         playerRB = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
+        if(gameType == GameType.Radey) { return; }
+
+        if(gameType == GameType.Goal)
+        {
+            gasInput = 0;
+            steeringInput =0;
+            brakeInput = 5;
+            return;
+        }
+
         speed = playerRB.velocity.magnitude * 3.5f;
         CheckInput();
         ApplyMotor();
@@ -54,11 +69,9 @@ public class CarController : MonoBehaviour
     {
         gasInput = Input.GetAxis("Vertical");
         steeringInput = Input.GetAxis("Horizontal");
-
         slipAngle = Vector3.Angle(transform.forward, playerRB.velocity - transform.forward);
-
-
     }
+
     private void ApplyBrake()
     {
         colliders.FRWheel.brakeTorque = brakeInput * brakePower * 0.7f;
@@ -70,7 +83,6 @@ public class CarController : MonoBehaviour
 
     private void ApplyMotor()
     {
-
         colliders.RRWheel.motorTorque = motorPower * gasInput;
         colliders.RLWheel.motorTorque = motorPower * gasInput;
     }
@@ -124,8 +136,8 @@ public class CarController : MonoBehaviour
     {
         brakeInput = 0;
     }
-
 }
+
 [System.Serializable]
 public class WheelColliders
 {

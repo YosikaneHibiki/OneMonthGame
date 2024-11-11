@@ -3,18 +3,15 @@ using UnityEngine.UI;
 
 public class WheelController : MonoBehaviour
 {
-    [SerializeField]
-    private Image wheelImage;
 
     private WheelCollider wheelCollider;
     private WheelFrictionCurve wheelFrictionCurve;
-
     private WheelFrictionCurve defaltWheelFruction;
+    public float SlipValue {  get; private set; }
 
 
     private void Start()
     {
-
         wheelCollider = GetComponent<WheelCollider>();
         defaltWheelFruction = wheelCollider.sidewaysFriction;
     }
@@ -23,17 +20,17 @@ public class WheelController : MonoBehaviour
     {
         WheelHit wheelHit;
         wheelCollider.GetGroundHit(out wheelHit);
-        wheelImage.color = new Color(Mathf.Abs(wheelHit.sidewaysSlip), 0, 0);
+        SlipValue = Mathf.Abs(wheelHit.sidewaysSlip);
 
-        if (wheelHit.sidewaysSlip > 0.4)
+        if (SlipValue > 0.4)
         {
-            Debug.Log("スライドを検知" + wheelHit.sidewaysSlip);
+            Debug.Log("スライドを検知" + SlipValue);
             wheelFrictionCurve = wheelCollider.sidewaysFriction;
             wheelFrictionCurve.stiffness = 1.3f;
-            wheelFrictionCurve.extremumSlip = 0.8f;
-            wheelFrictionCurve.asymptoteSlip = 0.8f;
-            wheelFrictionCurve.extremumValue = 0.7f;
-            wheelFrictionCurve.asymptoteValue = 0.7f;
+            wheelFrictionCurve.extremumSlip =1f;
+            wheelFrictionCurve.asymptoteSlip =1f;
+            wheelFrictionCurve.extremumValue = 0.8f;
+            wheelFrictionCurve.asymptoteValue = 0.8f;
             wheelCollider.sidewaysFriction = wheelFrictionCurve;
         }
         else
