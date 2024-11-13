@@ -16,6 +16,8 @@ public class DIScope : MonoBehaviour
     private RacePresenter racePresenter;
     [SerializeField]
     private CarDataBase carDataBase;
+    [SerializeField]
+    private RaceManager raceManager;
 
     private void Awake()
     {
@@ -29,9 +31,10 @@ public class DIScope : MonoBehaviour
         cancellationToken = cancellationTokenSource.Token;
         #region DI専用コンテナ
         carDataAccess = new(carDataBase);
-        raceDomain = new(cancellationToken, racePresenter);
-        carController.Inject(raceDomain,carDataAccess);
+        raceDomain = new(cancellationToken, racePresenter,carController);
+        carController.Inject(carDataAccess);
         goalPoint.Inject(raceDomain);
+        raceManager.Inject(raceDomain,raceDomain);
         #endregion
     }
 

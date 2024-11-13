@@ -29,8 +29,8 @@ public class WheelController : MonoBehaviour
             wheelFrictionCurve.stiffness = 1.3f;
             wheelFrictionCurve.extremumSlip =1f;
             wheelFrictionCurve.asymptoteSlip =1f;
-            wheelFrictionCurve.extremumValue = 0.8f;
-            wheelFrictionCurve.asymptoteValue = 0.8f;
+            wheelFrictionCurve.extremumValue = 1f;
+            wheelFrictionCurve.asymptoteValue = 1f;
             wheelCollider.sidewaysFriction = wheelFrictionCurve;
         }
         else

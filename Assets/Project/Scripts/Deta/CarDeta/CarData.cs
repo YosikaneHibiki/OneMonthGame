@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New CarData",menuName = "Data/Car/CarData")]
-public class CarDeta : ScriptableObject
+public class CarData : ScriptableObject
 {
     public CarID carID;
     public string Name;

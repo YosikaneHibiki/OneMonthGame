@@ -12,7 +12,7 @@ public class CarDataAccess : ICarRepository
         this.carDataBase = carDataBase;
     }
 
-    public CarDeta FindCar(string carId)
+    public CarData FindCar(string carId)
     {
         if(carId == string.Empty)
         {

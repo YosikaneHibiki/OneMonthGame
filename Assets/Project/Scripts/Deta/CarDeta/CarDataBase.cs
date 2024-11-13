@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New CarDataBase",menuName = "Data/Car/CarDataBase")]
 public class CarDataBase : ScriptableObject
 {
-    public List<CarDeta> carDetaBase;
+    public List<CarData> carDetaBase;
 }

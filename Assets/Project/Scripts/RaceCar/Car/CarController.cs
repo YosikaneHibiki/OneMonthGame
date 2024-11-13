@@ -9,13 +9,15 @@ public enum GameType
     Goal
 }
 
-public class CarController : MonoBehaviour
+public class CarController : MonoBehaviour , IResetPostion
 {
+    [SerializeField]
+    private RaceManager raceManager;
     [SerializeField]
     private CarInputController inputController;
     [SerializeField]
     private CarID carID;
-    private CarDeta carDeta;
+    private CarData carDeta;
 
     //クルマのデータ
     public float MaxSpeed { get; private set; }
@@ -23,7 +25,6 @@ public class CarController : MonoBehaviour
     public WheelColliders colliders;
     public WheelMeshes wheelMeshes;
     //クルマののドメイン
-    private IRaceInput raceInput;
     private ICarRepository carRepository;
     public GameType gameType;
     //現在のクルマの速度や角度
@@ -31,9 +32,8 @@ public class CarController : MonoBehaviour
     public float speed;
     private Rigidbody playerRB;
     
-    public void Inject(IRaceInput raceInput,ICarRepository carRepository)
+    public void Inject(ICarRepository carRepository)
     {
-        this.raceInput = raceInput;
         this.carRepository = carRepository;
     }
 
@@ -42,13 +42,17 @@ public class CarController : MonoBehaviour
         carDeta = carRepository.FindCar(carID.Id);
 
         MaxSpeed = carDeta.maxSpeed;
-        raceInput.GameRadey();
         playerRB = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         if(gameType == GameType.Radey) { return; }
+        if(gameType == GameType.Goal)
+        {
+            ApplyBrake();
+            return;
+        }
 
         speed = playerRB.velocity.magnitude * 3.5f;
         CheckInput();
@@ -89,7 +93,7 @@ public class CarController : MonoBehaviour
         {
             steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up);
         }
-        steeringAngle = Mathf.Clamp(steeringAngle, -90f, 90f);
+        steeringAngle = Mathf.Clamp(steeringAngle, -90, 90);
         colliders.FRWheel.steerAngle = steeringAngle;
         colliders.FLWheel.steerAngle = steeringAngle;
     }
@@ -111,6 +115,16 @@ public class CarController : MonoBehaviour
         wheelMesh.transform.rotation = quat;
     }
 
+    public void ChecekPoint(CheckPointData checkPointData)
+    {
+        raceManager.Checkpoint(checkPointData);
+    }
+
+    public void ResetPostion(Vector3 resetPostion)
+    {
+        this.gameObject.transform.position = resetPostion;
+        this.transform.rotation = Quaternion.LookRotation(transform.forward);
+    }
 }
 
 [System.Serializable]
