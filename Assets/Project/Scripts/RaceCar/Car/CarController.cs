@@ -51,7 +51,8 @@ public class CarController : MonoBehaviour, IResetPostion
         if (gameType == GameType.Radey) { return; }
         if (gameType == GameType.Goal)
         {
-            ApplyBrake();
+            ApplyBrake(999999999999999);
+            ApplyMotor(0);
             return;
         }
 
@@ -72,9 +73,9 @@ public class CarController : MonoBehaviour, IResetPostion
 
         speed = playerRB.velocity.magnitude * 3.5f;
         CheckInput();
-        ApplyMotor();
+        ApplyMotor(inputController.GasInput);
         ApplySteering();
-        ApplyBrake();
+        ApplyBrake(inputController.BrakeInput);
         ApplyWheelPositions();
     }
 
@@ -83,22 +84,22 @@ public class CarController : MonoBehaviour, IResetPostion
         slipAngle = Vector3.Angle(transform.forward, playerRB.velocity - transform.forward);
     }
 
-    private void ApplyBrake()
+    private void ApplyBrake(float brakeInput)
     {
-        colliders.FRWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.7f;
-        colliders.FLWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.7f;
+        colliders.FRWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.7f;
+        colliders.FLWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.7f;
 
-        colliders.RRWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.3f;
-        colliders.RLWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.3f;
+        colliders.RRWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.3f;
+        colliders.RLWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.3f;
     }
 
-    private void ApplyMotor()
+    private void ApplyMotor(float gasInput)
     {
 
-        colliders.FLWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * inputController.GasInput;
-        colliders.FRWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * inputController.GasInput;
-        colliders.RRWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * inputController.GasInput;
-        colliders.RLWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * inputController.GasInput;
+        colliders.FLWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * gasInput;
+        colliders.FRWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * gasInput;
+        colliders.RRWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * gasInput;
+        colliders.RLWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * gasInput;
     }
 
     private void ApplySteering()

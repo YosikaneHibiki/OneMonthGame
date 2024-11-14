@@ -33,7 +33,6 @@ public class DIScope : MonoBehaviour
         carDataAccess = new(carDataBase);
         raceDomain = new(cancellationToken, racePresenter,carController);
         carController.Inject(carDataAccess);
-        goalPoint.Inject(raceDomain);
         raceManager.Inject(raceDomain,raceDomain);
         #endregion
     }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class RaceManager : MonoBehaviour
 { 
+
     private IRaceInput raceInput;
     private ICheckpoint checkpoint;
 
@@ -27,7 +28,7 @@ public class RaceManager : MonoBehaviour
 
     public void GameEnd()
     {
-        
+        raceInput.GameEnd();
     }
 
     public void CarReset()

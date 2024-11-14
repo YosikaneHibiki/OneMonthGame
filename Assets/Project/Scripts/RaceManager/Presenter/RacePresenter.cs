@@ -31,7 +31,7 @@ public class RacePresenter : MonoBehaviour, IRaceOutput
     {
         startPresenter.GameGoal();
         controller.gameType = GameType.Goal;
-        goalPresenter.GoalPresenter();
+        goalPresenter.GameGoal();
     }
 
 
