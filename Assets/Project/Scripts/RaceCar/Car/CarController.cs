@@ -1,6 +1,5 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public enum GameType
 {
@@ -9,7 +8,7 @@ public enum GameType
     Goal
 }
 
-public class CarController : MonoBehaviour , IResetPostion
+public class CarController : MonoBehaviour, IResetPostion
 {
     [SerializeField]
     private RaceManager raceManager;
@@ -30,8 +29,10 @@ public class CarController : MonoBehaviour , IResetPostion
     //現在のクルマの速度や角度
     public float slipAngle;
     public float speed;
+    private float resetTime = 0f;
+    public float floatingTime = 5.0f;
     private Rigidbody playerRB;
-    
+
     public void Inject(ICarRepository carRepository)
     {
         this.carRepository = carRepository;
@@ -47,11 +48,26 @@ public class CarController : MonoBehaviour , IResetPostion
 
     private void Update()
     {
-        if(gameType == GameType.Radey) { return; }
-        if(gameType == GameType.Goal)
+        if (gameType == GameType.Radey) { return; }
+        if (gameType == GameType.Goal)
         {
             ApplyBrake();
             return;
+        }
+
+        if (colliders.FLWheel.isGrounded)
+        {
+            resetTime = 0f; 
+        }
+        else
+        {
+            resetTime += Time.deltaTime;
+        }
+
+        if(resetTime >= floatingTime)
+        {
+            resetTime = 0;
+            raceManager.CarReset();
         }
 
         speed = playerRB.velocity.magnitude * 3.5f;
@@ -120,10 +136,11 @@ public class CarController : MonoBehaviour , IResetPostion
         raceManager.Checkpoint(checkPointData);
     }
 
-    public void ResetPostion(Vector3 resetPostion)
+    public void ResetPostion(CheckPointData checkPointData)
     {
-        this.gameObject.transform.position = resetPostion;
-        this.transform.rotation = Quaternion.LookRotation(transform.forward);
+        playerRB.velocity = Vector3.zero;
+        this.gameObject.transform.position = checkPointData.transform.position;
+        this.transform.rotation = Quaternion.LookRotation(-checkPointData.transform.right);
     }
 }
 

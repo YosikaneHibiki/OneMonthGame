@@ -26,7 +26,7 @@ public class GameStartPresenter : MonoBehaviour
             return;
         }
         var time = Time.time - Timer;
-        TimerText.text = time.ToString();
+        TimerText.text = time.ToString("f2");
     }
 
 }

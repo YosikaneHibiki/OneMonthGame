@@ -41,8 +41,14 @@ public class RaceDomain : IRaceInput, ICheckpoint
         Checkpoints.Add(checkPointData);
         if (checkPointData.CheckPointNumber != CheckPointCount)
         {
-            resetPostion.ResetPostion(Checkpoints[CheckPointCount -2].CheckPointPosition);
+            CheckPointCount--;
+            resetPostion.ResetPostion(Checkpoints[CheckPointCount - 1]);
             Checkpoints.Remove(checkPointData);
         }
+    }
+
+    public void GameReset()
+    {
+        resetPostion.ResetPostion(Checkpoints[CheckPointCount-1]);
     }
 }

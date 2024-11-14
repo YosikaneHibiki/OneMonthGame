@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckPointData : MonoBehaviour
+public class CheckPointData
 {
     public readonly int CheckPointNumber;
-    public readonly Vector3 CheckPointPosition;
-    public CheckPointData(int checkPointNumber, Vector3 checkPointPosition)
+    public readonly Transform transform;
+    public CheckPointData(int checkPointNumber, Transform transform)
     {
         CheckPointNumber = checkPointNumber;
-        CheckPointPosition = checkPointPosition;
+        this.transform = transform;
     }
 }

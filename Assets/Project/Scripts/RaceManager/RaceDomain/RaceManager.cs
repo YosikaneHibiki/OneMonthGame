@@ -30,6 +30,11 @@ public class RaceManager : MonoBehaviour
         
     }
 
+    public void CarReset()
+    {
+        raceInput.GameReset();
+    }
+
     public void Checkpoint(CheckPointData checkPointData)
     {
         checkpoint.CheckPoint(checkPointData);

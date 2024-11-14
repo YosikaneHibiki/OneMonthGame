@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7272994491044956580}
   - component: {fileID: 6577596957787479250}
   - component: {fileID: 8255006067409378580}
+  - component: {fileID: 7495048501858141652}
+  - component: {fileID: 3383936550097482460}
   m_Layer: 0
   m_Name: Simple Retro Car
   m_TagString: Untagged
@@ -50,7 +52,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913791274868359639}
   serializedVersion: 4
-  m_Mass: 1000
+  m_Mass: 1500
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -81,6 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2460c392c22ccbf46b28591a2b93da44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raceManager: {fileID: 0}
+  inputController: {fileID: 7495048501858141652}
+  carID: {fileID: 11400000, guid: 98562e5ec50dae94ca0488b2d9bd854c, type: 2}
   colliders:
     FRWheel: {fileID: 6676918234391519359}
     FLWheel: {fileID: 5864899365606384500}
@@ -91,38 +96,42 @@ MonoBehaviour:
     FLWheel: {fileID: 7173002720995141455}
     RRWheel: {fileID: 2856398239219536958}
     RLWheel: {fileID: 8572556557649679496}
-  gasInput: 0
-  brakeInput: 0
-  steeringInput: 0
-  motorPower: 480.8
-  brakePower: 3584
+  gameType: 0
   slipAngle: 0
-  steeringCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 64.51865
-      inSlope: -0.31126875
-      outSlope: -0.31126875
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 1
-    - serializedVersion: 3
-      time: 79.45308
-      value: 17.325428
-      inSlope: 0.92114925
-      outSlope: 0.92114925
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.9998488
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   speed: 0
-  maxSpeed: 160
+--- !u!114 &7495048501858141652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913791274868359639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df01c4c91b848c04b905af08f5e3931d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &3383936550097482460
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913791274868359639}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6706227, y: 0.61473453, z: 4.3006043}
+  m_Center: {x: 0.0025981069, y: 0.94220394, z: 0.12866044}
 --- !u!1 &1440132822810510797
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +143,6 @@ GameObject:
   - component: {fileID: 1937188619272581500}
   - component: {fileID: 7651059433297348769}
   - component: {fileID: 8488121757409927696}
-  - component: {fileID: 3074511759709408211}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -209,27 +217,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3074511759709408211
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440132822810510797}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.6706227, y: 0.61473453, z: 4.3006043}
-  m_Center: {x: 0.0025981069, y: 0.94220394, z: 0.12866044}
 --- !u!1 &3112955578289352757
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,10 +353,10 @@ WheelCollider:
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
-    m_ExtremumValue: 0.5
-    m_AsymptoteSlip: 0.8
-    m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_ExtremumValue: 0.6
+    m_AsymptoteSlip: 0.6
+    m_AsymptoteValue: 0.3
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -397,7 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c7c363faf30a945bc04309fe678765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheelImage: {fileID: 0}
 --- !u!1 &3818673833820336530
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,13 +523,13 @@ WheelCollider:
     m_ExtremumValue: 0.7
     m_AsymptoteSlip: 0.6
     m_AsymptoteValue: 0.7
-    m_Stiffness: 1
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.1
-    m_ExtremumValue: 0.4
-    m_AsymptoteSlip: 0.1
-    m_AsymptoteValue: 0.4
-    m_Stiffness: 0.7
+    m_ExtremumValue: 0.2
+    m_AsymptoteSlip: 0.5
+    m_AsymptoteValue: 0.8
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -565,7 +551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c7c363faf30a945bc04309fe678765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheelImage: {fileID: 0}
 --- !u!1 &4914357438343973625
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,13 +690,13 @@ WheelCollider:
     m_ExtremumValue: 0.7
     m_AsymptoteSlip: 0.6
     m_AsymptoteValue: 0.7
-    m_Stiffness: 1
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.1
-    m_ExtremumValue: 0.4
-    m_AsymptoteSlip: 0.1
-    m_AsymptoteValue: 0.4
-    m_Stiffness: 0.7
+    m_ExtremumValue: 0.2
+    m_AsymptoteSlip: 0.5
+    m_AsymptoteValue: 0.8
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -733,7 +718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c7c363faf30a945bc04309fe678765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheelImage: {fileID: 0}
 --- !u!1 &6266458929363416403
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,10 +854,10 @@ WheelCollider:
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
-    m_ExtremumValue: 0.5
-    m_AsymptoteSlip: 0.8
-    m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_ExtremumValue: 0.6
+    m_AsymptoteSlip: 0.6
+    m_AsymptoteValue: 0.3
+    m_Stiffness: 0.9
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -901,4 +885,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c7c363faf30a945bc04309fe678765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheelImage: {fileID: 0}
