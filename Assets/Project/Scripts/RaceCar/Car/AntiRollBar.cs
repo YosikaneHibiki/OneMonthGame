@@ -1,42 +1,68 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AntiRollBar : MonoBehaviour {
+public class AntiRollBar : MonoBehaviour
+{
 
-	public WheelCollider WheelL;
-	public WheelCollider WheelR;
-	public float AntiRoll = 5000.0f;
+    public WheelColliders colliders;
+    public float AntiRoll = 5000.0f;
 
-	private Rigidbody car;
+    private Rigidbody car;
 
-	void Start(){
-		car = GetComponent<Rigidbody> ();
-	}
+    void Start()
+    {
+        car = GetComponent<Rigidbody>();
+    }
 
-	void FixedUpdate ()
-	{
-		WheelHit hit;
-		float travelL = 1.0f;
-		float travelR = 1.0f;
+    void FixedUpdate()
+    {
+        WheelHit hit;
+        float travelFL = 1.0f;
+        float travelFR = 1.0f;
+        float travelRL = 1.0f;
+        float travelRR = 1.0f;
 
 
-		bool groundedL = WheelL.GetGroundHit (out hit);
-		if (groundedL) {
-			travelL = (-WheelL.transform.InverseTransformPoint (hit.point).y - WheelL.radius) / WheelL.suspensionDistance;
-		}
+        bool groundedFL = colliders.FLWheel.GetGroundHit(out hit);
+        if (groundedFL)
+        {
+            travelFL = (-colliders.FLWheel.transform.InverseTransformPoint(hit.point).y - colliders.FLWheel.radius) / colliders.FLWheel.suspensionDistance;
+        }
 
-		bool groundedR = WheelR.GetGroundHit (out hit);
-		if (groundedR) {
-			travelR = (-WheelR.transform.InverseTransformPoint (hit.point).y - WheelR.radius) / WheelR.suspensionDistance;
-		}
+        bool groundedRL = colliders.RLWheel.GetGroundHit(out hit);
+        if (groundedRL)
+        {
+            travelRL = (-colliders.RLWheel.transform.InverseTransformPoint(hit.point).y - colliders.RLWheel.radius) / colliders.RLWheel.suspensionDistance;
+        }
+        bool groundedRR = colliders.RLWheel.GetGroundHit(out hit);
+        if (groundedRL)
+        {
+            travelRR = (-colliders.RLWheel.transform.InverseTransformPoint(hit.point).y - colliders.RLWheel.radius) / colliders.RLWheel.suspensionDistance;
+        }
 
-		float antiRollForce = (travelL - travelR) * AntiRoll;
 
-		if (groundedL)
-			car.AddForceAtPosition (WheelL.transform.up * -antiRollForce, WheelL.transform.position);
+        bool groundedFR = colliders.FRWheel.GetGroundHit(out hit);
+        if (groundedFR)
+        {
+            travelFR = (-colliders.FRWheel.transform.InverseTransformPoint(hit.point).y - colliders.FRWheel.radius) / colliders.FRWheel.suspensionDistance;
+        }
 
-		if (groundedR)
-			car.AddForceAtPosition (WheelR.transform.up * antiRollForce, WheelR.transform.position);
-	}
+        float antiFrontRollForce = (travelFL - travelFR) * AntiRoll;
+
+        if (groundedFL)
+            car.AddForceAtPosition(colliders.FLWheel.transform.up * -antiFrontRollForce, colliders.FLWheel.transform.position);
+
+        if (groundedFR)
+            car.AddForceAtPosition(colliders.FRWheel.transform.up * antiFrontRollForce, colliders.FRWheel.transform.position);
+    }
+
+    public void CarAddForce(float antiRollForce,WheelCollider wheelCollider,Rigidbody car)
+    {
+        car.AddForceAtPosition(wheelCollider.transform.up * antiRollForce, wheelCollider.transform.position);
+    }
+
+    private float AnitRoll(WheelCollider wheelCollider ,WheelHit hit)
+    {
+        return (-wheelCollider.transform.InverseTransformPoint(hit.point).y - wheelCollider.radius) / wheelCollider.suspensionDistance;
+    }
+
 }

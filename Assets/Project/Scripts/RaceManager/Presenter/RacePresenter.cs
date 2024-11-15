@@ -29,8 +29,6 @@ public class RacePresenter : MonoBehaviour, IRaceOutput
 
     public void GoaleOutput(CancellationToken token)
     {
-        startPresenter.GameGoal();
-        controller.gameType = GameType.Goal;
         goalPresenter.GoalPresenter();
     }
 

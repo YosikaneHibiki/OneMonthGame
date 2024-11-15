@@ -8,13 +8,15 @@ public class RaceDomain : IRaceInput, ICheckpoint
     private List<CheckPointData> Checkpoints = new();
     private IRaceOutput raceOutput;
     private IResetPostion resetPostion;
+    private IEnumerable<IGameEnd> gameEnds;
     private CancellationToken token;
 
-    public RaceDomain(CancellationToken token, IRaceOutput raceOutput, IResetPostion resetPostion)
+    public RaceDomain(CancellationToken token, IRaceOutput raceOutput, IResetPostion resetPostion, IEnumerable<IGameEnd> gameEnds)
     {
         this.raceOutput = raceOutput;
         this.resetPostion = resetPostion;
         this.token = token;
+        this.gameEnds = gameEnds;
     }
 
     public void GameRadey()
@@ -33,6 +35,10 @@ public class RaceDomain : IRaceInput, ICheckpoint
     {
         Debug.Log("GameEnd‚©‚©‚Á‚½ŽžŠÔ‚Í");
         raceOutput.GoaleOutput(token);
+        foreach(var gameEnd in gameEnds)
+        {
+            gameEnd.GameEnd();
+        }
     }
 
     public void CheckPoint(CheckPointData checkPointData)

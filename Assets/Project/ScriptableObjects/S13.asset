@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carID: {fileID: 11400000, guid: 98562e5ec50dae94ca0488b2d9bd854c, type: 2}
   Name: "S13\u30B7\u30EB\u30D3\u30A2"
-  motorPower: 600
-  brakePower: 3500
+  motorPower: 3000
+  brakePower: 10184
   maxSpeed: 180
   steeringCurve:
     serializedVersion: 2
@@ -23,44 +23,44 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 50.5885
-      inSlope: -0.96360266
-      outSlope: -0.96360266
+      inSlope: -0.27979526
+      outSlope: -0.27979526
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 16.971247
-      value: 34.234962
-      inSlope: -0.39384747
-      outSlope: -0.39384747
+      time: 24.54085
+      value: 43.722088
+      inSlope: -0.63237494
+      outSlope: -0.63237494
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 20.897783
-      value: 34.92567
-      inSlope: -0.057837665
-      outSlope: -0.057837665
+      time: 27.98324
+      value: 40.33149
+      inSlope: -0.77330744
+      outSlope: -0.77330744
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 42.230114
-      value: 28.705524
-      inSlope: -0.26571518
-      outSlope: -0.26571518
+      time: 43.72047
+      value: 31.492512
+      inSlope: -0.37895676
+      outSlope: -0.37895676
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 100.59825
-      value: 14.706082
-      inSlope: -0.23984733
-      outSlope: -0.23984733
+      time: 99.521835
+      value: 20.541317
+      inSlope: -0.19625317
+      outSlope: -0.19625317
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -68,6 +68,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Torque: 0.55
-  FrontTorque: 0.45
-  RiaTorque: 0.55
+  Torque: 0.56
+  FrontTorque: 0.44
+  RiaTorque: 0.56

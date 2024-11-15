@@ -8,7 +8,7 @@ public enum GameType
     Goal
 }
 
-public class CarController : MonoBehaviour, IResetPostion
+public class CarController : MonoBehaviour, IResetPostion,IGameEnd
 {
     [SerializeField]
     private RaceManager raceManager;
@@ -49,11 +49,7 @@ public class CarController : MonoBehaviour, IResetPostion
     private void Update()
     {
         if (gameType == GameType.Radey) { return; }
-        if (gameType == GameType.Goal)
-        {
-            ApplyBrake();
-            return;
-        }
+        if (gameType == GameType.Goal) { return; }
 
         if (colliders.FLWheel.isGrounded)
         {
@@ -72,9 +68,9 @@ public class CarController : MonoBehaviour, IResetPostion
 
         speed = playerRB.velocity.magnitude * 3.5f;
         CheckInput();
-        ApplyMotor();
-        ApplySteering();
-        ApplyBrake();
+        ApplyMotor(inputController.GasInput);
+        ApplySteering(inputController.SteeringInput);
+        ApplyBrake(inputController.BrakeInput);
         ApplyWheelPositions();
     }
 
@@ -83,31 +79,31 @@ public class CarController : MonoBehaviour, IResetPostion
         slipAngle = Vector3.Angle(transform.forward, playerRB.velocity - transform.forward);
     }
 
-    private void ApplyBrake()
+    private void ApplyBrake(float brakeInput)
     {
-        colliders.FRWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.7f;
-        colliders.FLWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.7f;
+        colliders.FRWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.7f;
+        colliders.FLWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.7f;
 
-        colliders.RRWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.3f;
-        colliders.RLWheel.brakeTorque = inputController.BrakeInput * carDeta.brakePower * 0.3f;
+        colliders.RRWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.3f;
+        colliders.RLWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.3f;
     }
 
-    private void ApplyMotor()
+    private void ApplyMotor(float gasInput)
     {
 
-        colliders.FLWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * inputController.GasInput;
-        colliders.FRWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * inputController.GasInput;
-        colliders.RRWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * inputController.GasInput;
-        colliders.RLWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * inputController.GasInput;
+        colliders.FLWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * gasInput;
+        colliders.FRWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * gasInput;
+        colliders.RRWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * gasInput;
+        colliders.RLWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * gasInput;
     }
 
-    private void ApplySteering()
+    private void ApplySteering(float steeringInput)
     {
-        float steeringAngle = inputController.SteeringInput * carDeta.steeringCurve.Evaluate(speed);
+        float steeringAngle = steeringInput * carDeta.steeringCurve.Evaluate(speed);
 
-        if (slipAngle < 120f)
+        if (slipAngle > 4f)
         {
-            steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up);
+            steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up)*0.85f;
         }
         steeringAngle = Mathf.Clamp(steeringAngle, -90, 90);
         colliders.FRWheel.steerAngle = steeringAngle;
@@ -141,6 +137,16 @@ public class CarController : MonoBehaviour, IResetPostion
         playerRB.velocity = Vector3.zero;
         this.gameObject.transform.position = checkPointData.transform.position;
         this.transform.rotation = Quaternion.LookRotation(-checkPointData.transform.right);
+    }
+
+    public void GameEnd()
+    {
+        gameType = GameType.Goal;
+        playerRB.mass = 99999;
+        playerRB.freezeRotation = true;
+        ApplyBrake(999999999999999);
+        ApplyMotor(0);
+        ApplySteering(0);
     }
 }
 

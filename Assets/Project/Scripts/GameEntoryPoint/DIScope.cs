@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -8,10 +10,12 @@ public class DIScope : MonoBehaviour
     private RaceDomain raceDomain;
     private CarDataAccess carDataAccess;
 
+    private IEnumerable<IGameEnd> gameEnds;
+
     [SerializeField]
     private CarController carController;
     [SerializeField]
-    private GoalPoint goalPoint;
+    private GoalPoint goalPoint = new();
     [SerializeField]
     private RacePresenter racePresenter;
     [SerializeField]
@@ -31,10 +35,10 @@ public class DIScope : MonoBehaviour
         cancellationToken = cancellationTokenSource.Token;
         #region DI専用コンテナ
         carDataAccess = new(carDataBase);
-        raceDomain = new(cancellationToken, racePresenter,carController);
+        raceDomain = new(cancellationToken, racePresenter, carController, gameEnds);
         carController.Inject(carDataAccess);
         goalPoint.Inject(raceDomain);
-        raceManager.Inject(raceDomain,raceDomain);
+        raceManager.Inject(raceDomain, raceDomain);
         #endregion
     }
 
