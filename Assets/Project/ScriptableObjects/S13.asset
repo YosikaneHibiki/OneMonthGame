@@ -14,53 +14,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carID: {fileID: 11400000, guid: 98562e5ec50dae94ca0488b2d9bd854c, type: 2}
   Name: "S13\u30B7\u30EB\u30D3\u30A2"
-  motorPower: 3000
-  brakePower: 10184
+  motorPower: 800
+  brakePower: 30000
   maxSpeed: 180
   steeringCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 50.5885
-      inSlope: -0.27979526
-      outSlope: -0.27979526
+      value: 49.90324
+      inSlope: -0.08108546
+      outSlope: -0.08108546
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 24.54085
-      value: 43.722088
-      inSlope: -0.63237494
-      outSlope: -0.63237494
+      time: 33.974678
+      value: 47.148388
+      inSlope: -0.15140295
+      outSlope: -0.15140295
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 27.98324
-      value: 40.33149
-      inSlope: -0.77330744
-      outSlope: -0.77330744
+      time: 42.147133
+      value: 45.336388
+      inSlope: -0.2686164
+      outSlope: -0.2686164
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 43.72047
-      value: 31.492512
-      inSlope: -0.37895676
-      outSlope: -0.37895676
+      time: 55.183212
+      value: 41.223343
+      inSlope: -0.44680524
+      outSlope: -0.44680524
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 99.521835
-      value: 20.541317
-      inSlope: -0.19625317
-      outSlope: -0.19625317
+      time: 68.35722
+      value: 33.60747
+      inSlope: -0.6114639
+      outSlope: -0.6114639
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 87.08159
+      value: 21.533443
+      inSlope: -0.64482975
+      outSlope: -0.64482975
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -68,6 +77,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Torque: 0.56
-  FrontTorque: 0.44
-  RiaTorque: 0.56
+  Torque: 1
+  FrontTorque: 0
+  RiaTorque: 1

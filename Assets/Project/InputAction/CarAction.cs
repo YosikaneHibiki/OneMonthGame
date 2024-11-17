@@ -80,6 +80,24 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfcb5803-8ac9-42b6-a49f-203bd189d384"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c9436c8-6fd3-41ee-bf53-d29852b4259c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -170,6 +188,28 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
                     ""action"": ""TestSystemAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ec7b2ab-16c6-4d6d-976a-984f0587d4b9"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59fdaee3-6e50-47d6-9fc0-8d68497e14bc"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -184,6 +224,8 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         m_CarActionMap_gearUpAction = m_CarActionMap.FindAction("gearUpAction", throwIfNotFound: true);
         m_CarActionMap_GearDownAction = m_CarActionMap.FindAction("GearDownAction", throwIfNotFound: true);
         m_CarActionMap_TestSystemAction = m_CarActionMap.FindAction("TestSystemAction", throwIfNotFound: true);
+        m_CarActionMap_ResetKey = m_CarActionMap.FindAction("ResetKey", throwIfNotFound: true);
+        m_CarActionMap_PauseButton = m_CarActionMap.FindAction("PauseButton", throwIfNotFound: true);
     }
 
     ~@CarAction()
@@ -256,6 +298,8 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_CarActionMap_gearUpAction;
     private readonly InputAction m_CarActionMap_GearDownAction;
     private readonly InputAction m_CarActionMap_TestSystemAction;
+    private readonly InputAction m_CarActionMap_ResetKey;
+    private readonly InputAction m_CarActionMap_PauseButton;
     public struct CarActionMapActions
     {
         private @CarAction m_Wrapper;
@@ -266,6 +310,8 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         public InputAction @gearUpAction => m_Wrapper.m_CarActionMap_gearUpAction;
         public InputAction @GearDownAction => m_Wrapper.m_CarActionMap_GearDownAction;
         public InputAction @TestSystemAction => m_Wrapper.m_CarActionMap_TestSystemAction;
+        public InputAction @ResetKey => m_Wrapper.m_CarActionMap_ResetKey;
+        public InputAction @PauseButton => m_Wrapper.m_CarActionMap_PauseButton;
         public InputActionMap Get() { return m_Wrapper.m_CarActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -293,6 +339,12 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
             @TestSystemAction.started += instance.OnTestSystemAction;
             @TestSystemAction.performed += instance.OnTestSystemAction;
             @TestSystemAction.canceled += instance.OnTestSystemAction;
+            @ResetKey.started += instance.OnResetKey;
+            @ResetKey.performed += instance.OnResetKey;
+            @ResetKey.canceled += instance.OnResetKey;
+            @PauseButton.started += instance.OnPauseButton;
+            @PauseButton.performed += instance.OnPauseButton;
+            @PauseButton.canceled += instance.OnPauseButton;
         }
 
         private void UnregisterCallbacks(ICarActionMapActions instance)
@@ -315,6 +367,12 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
             @TestSystemAction.started -= instance.OnTestSystemAction;
             @TestSystemAction.performed -= instance.OnTestSystemAction;
             @TestSystemAction.canceled -= instance.OnTestSystemAction;
+            @ResetKey.started -= instance.OnResetKey;
+            @ResetKey.performed -= instance.OnResetKey;
+            @ResetKey.canceled -= instance.OnResetKey;
+            @PauseButton.started -= instance.OnPauseButton;
+            @PauseButton.performed -= instance.OnPauseButton;
+            @PauseButton.canceled -= instance.OnPauseButton;
         }
 
         public void RemoveCallbacks(ICarActionMapActions instance)
@@ -340,5 +398,7 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         void OnGearUpAction(InputAction.CallbackContext context);
         void OnGearDownAction(InputAction.CallbackContext context);
         void OnTestSystemAction(InputAction.CallbackContext context);
+        void OnResetKey(InputAction.CallbackContext context);
+        void OnPauseButton(InputAction.CallbackContext context);
     }
 }

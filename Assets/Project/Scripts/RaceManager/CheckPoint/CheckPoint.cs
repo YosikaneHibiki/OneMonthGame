@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckPoint : MonoBehaviour ,IGameEnd
+public class CheckPoint : MonoBehaviour ,IRaceEnd
 {
 
     [SerializeField]
@@ -10,7 +10,7 @@ public class CheckPoint : MonoBehaviour ,IGameEnd
 
     private bool isGameEnd;
 
-    public void GameEnd()
+    public void RaceEnd()
     {
         isGameEnd = true;
     }

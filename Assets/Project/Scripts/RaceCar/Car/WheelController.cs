@@ -26,11 +26,11 @@ public class WheelController : MonoBehaviour
         {
             Debug.Log("スライドを検知" + SlipValue);
             wheelFrictionCurve = wheelCollider.sidewaysFriction;
-            wheelFrictionCurve.stiffness = 1.3f;
-            wheelFrictionCurve.extremumSlip =1f;
-            wheelFrictionCurve.asymptoteSlip =1f;
-            wheelFrictionCurve.extremumValue = 1f;
-            wheelFrictionCurve.asymptoteValue = 1f;
+            wheelFrictionCurve.stiffness = 1f;
+            wheelFrictionCurve.extremumSlip =0.8f;
+            wheelFrictionCurve.asymptoteSlip =0.5f;
+            wheelFrictionCurve.extremumValue = 0.8f;
+            wheelFrictionCurve.asymptoteValue = 0.5f;
             wheelCollider.sidewaysFriction = wheelFrictionCurve;
         }
         else

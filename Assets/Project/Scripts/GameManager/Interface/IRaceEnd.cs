@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IGameEnd
+public interface IRaceEnd
 {
-    void GameEnd();
+    void RaceEnd();
 }

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class GameStartPresenter : MonoBehaviour , IGameEnd
+public class GameStartPresenter : MonoBehaviour , IRaceEnd
 {
     [SerializeField]
     private TMP_Text TimerText;
@@ -24,7 +24,7 @@ public class GameStartPresenter : MonoBehaviour , IGameEnd
         TimerText.text = time.ToString("f2");
     }
 
-    public void GameEnd()
+    public void RaceEnd()
     {
         isGameStart = false;
     }

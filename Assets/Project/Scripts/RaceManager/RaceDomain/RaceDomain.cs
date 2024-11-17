@@ -8,37 +8,53 @@ public class RaceDomain : IRaceInput, ICheckpoint
     private List<CheckPointData> Checkpoints = new();
     private IRaceOutput raceOutput;
     private IResetPostion resetPostion;
-    private IEnumerable<IGameEnd> gameEnds;
+    private List<IRaceReady> raceRadeys;
+    private List<IRaceStart> raceStarts;
+    private List<IRaceEnd> raceEnds;
     private CancellationToken token;
 
-    public RaceDomain(CancellationToken token, IRaceOutput raceOutput, IResetPostion resetPostion, IEnumerable<IGameEnd> gameEnds)
+    public RaceDomain(CancellationToken token, IRaceOutput raceOutput,
+        IResetPostion resetPostion, List<IRaceReady> raceReadeys
+        , List<IRaceStart> raceStarts, List<IRaceEnd> raceEnds)
     {
         this.raceOutput = raceOutput;
         this.resetPostion = resetPostion;
         this.token = token;
-        this.gameEnds = gameEnds;
+        this.raceRadeys = raceReadeys;
+        this.raceStarts = raceStarts;
+        this.raceEnds = raceEnds;
     }
 
     public void GameRadey()
     {
         Debug.Log("Radey");
+        Time.timeScale = 1;
+        foreach (var race in raceRadeys)
+        {
+            race.RaceReadey();
+        }
+
         raceOutput.RadeyOutput(token);
     }
 
-    public void GameStart()
+    public void RaceStart()
     {
         Debug.Log("Start");
+        foreach (var race in raceStarts)
+        {
+            race.RaceStart();
+        }
         raceOutput.StartOutput(token);
     }
 
-    public void GameEnd()
+    public void RaceGoal()
     {
-        Debug.Log("GameEnd‚©‚©‚Á‚½ŽžŠÔ‚Í");
-        raceOutput.GoaleOutput(token);
-        foreach(var gameEnd in gameEnds)
+        foreach (var race in raceEnds)
         {
-            gameEnd.GameEnd();
+        Debug.Log("GameEnd‚©‚©‚Á‚½ŽžŠÔ‚Í");
+            race.RaceEnd();
         }
+        raceOutput.GoaleOutput(token);
     }
 
     public void CheckPoint(CheckPointData checkPointData)
@@ -55,6 +71,6 @@ public class RaceDomain : IRaceInput, ICheckpoint
 
     public void GameReset()
     {
-        resetPostion.ResetPostion(Checkpoints[CheckPointCount-1]);
+        resetPostion.ResetPostion(Checkpoints[CheckPointCount - 1]);
     }
 }

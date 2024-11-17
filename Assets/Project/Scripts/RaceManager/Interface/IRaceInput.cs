@@ -3,7 +3,7 @@ using UnityEngine;
 public interface IRaceInput
 {
     public void GameRadey();
-    public void GameStart();
-    public void GameEnd();
+    public void RaceStart();
+    public void RaceGoal();
     public void GameReset();
 }

@@ -20,14 +20,14 @@ public class RaceManager : MonoBehaviour
         raceInput.GameRadey();
     }
 
-    public void GameStart()
+    public void RaceStart()
     {
-        raceInput.GameStart();
+        raceInput.RaceStart();
     }
 
-    public void GameEnd()
+    public void RaceGoal()
     {
-        
+        raceInput.RaceGoal();
     }
 
     public void CarReset()
