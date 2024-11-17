@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -7,40 +9,57 @@ public class DIScope : MonoBehaviour
     private CancellationToken cancellationToken;
     private RaceDomain raceDomain;
     private CarDataAccess carDataAccess;
+    private SceneLoadUnity sceneLoad;
 
+    private IEnumerable<IRaceReady> raceReady;
+    private IEnumerable<IRaceStart> raceStart;
+    private IEnumerable<IRaceEnd> raceEnd;
+ 
     [SerializeField]
     private CarController carController;
-    [SerializeField]
-    private GoalPoint goalPoint;
     [SerializeField]
     private RacePresenter racePresenter;
     [SerializeField]
     private CarDataBase carDataBase;
     [SerializeField]
     private RaceManager raceManager;
+    [SerializeField]
+    private SceneLoadGate sceneLoadGate;
 
     private void Awake()
     {
+        raceReady = FindObjectsOfType<MonoBehaviour>().OfType<IRaceReady>();
+        raceStart = FindObjectsOfType<MonoBehaviour>().OfType<IRaceStart>();
+        raceEnd = FindObjectsOfType<MonoBehaviour>().OfType<IRaceEnd>();
+        cancellationTokenSource = new CancellationTokenSource();
+        cancellationToken = cancellationTokenSource.Token;
+
         DIContainer();
     }
 
     public void DIContainer()
     {
-
-        cancellationTokenSource = new CancellationTokenSource();
-        cancellationToken = cancellationTokenSource.Token;
         #region DI専用コンテナ
-        carDataAccess = new(carDataBase);
-        raceDomain = new(cancellationToken, racePresenter,carController);
+        
+        carDataAccess = new CarDataAccess(carDataBase);
+        sceneLoad = new SceneLoadUnity();
+        raceDomain = new RaceDomain(cancellationToken, racePresenter, 
+    carController,raceReady.ToList(),raceStart.ToList(),raceEnd.ToList());
+        sceneLoadGate.Inject(sceneLoad);
         carController.Inject(carDataAccess);
+<<<<<<< HEAD
         raceManager.Inject(raceDomain,raceDomain);
+=======
+        raceManager.Inject(raceDomain, raceDomain);
+>>>>>>> gamepresenter
         #endregion
     }
 
     private void OnDestroy()
     {
-        cancellationTokenSource.Cancel();
+        Debug.Log("削除");
+        cancellationTokenSource?.Cancel();
+        cancellationTokenSource?.Dispose();
+        cancellationTokenSource = null;
     }
-
-
 }

@@ -1,15 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarInputController : MonoBehaviour
+public class CarInputController : MonoBehaviour, IRaceStart
 {
+    [SerializeField]
+    private RaceManager raceManager;
+    [SerializeField]
+    private EscapeMenu escapeMenu;
+
     private CarAction carAction;
     private CarAction.CarActionMapActions carActionMapActions;
+
     public float GasInput { get; private set; }
     public float BrakeInput { get; private set; }
-    public float SteeringInput {  get; private set; }
+    public float SteeringInput { get; private set; }
 
     private void Awake()
     {
@@ -17,17 +21,22 @@ public class CarInputController : MonoBehaviour
         carActionMapActions = carAction.CarActionMap;
     }
 
-    private void OnEnable()
+    private void KeySeting()
     {
+        carActionMapActions.PauseButton.started += OnPauseMenu;
+        carActionMapActions.ResetKey.started += OnReset;
         carActionMapActions.MoveAction.performed += OnGasInput;
         carActionMapActions.MoveAction.canceled += OnGasCancel;
         carActionMapActions.Brake.performed += OnBrake;
         carActionMapActions.Brake.canceled += OnBrakeCancel;
-        carActionMapActions.HandleAction.performed += OnSteeringInput;
-        carActionMapActions.HandleAction.canceled += OnSteeringCancel;
-
         carAction.Enable();
     }
+
+    private void FixedUpdate()
+    {
+        SteeringInput = Input.GetAxis("Horizontal");
+    }
+
 
     private void OnDisable()
     {
@@ -44,16 +53,6 @@ public class CarInputController : MonoBehaviour
         GasInput = 0;
     }
 
-    private void OnSteeringInput(InputAction.CallbackContext context)
-    {
-        SteeringInput = context.ReadValue<Vector2>().x;
-    }
-
-    private void OnSteeringCancel(InputAction.CallbackContext context)
-    {
-        SteeringInput = 0;
-    }
-
     private void OnBrake(InputAction.CallbackContext context)
     {
         BrakeInput = context.ReadValue<float>();
@@ -64,4 +63,18 @@ public class CarInputController : MonoBehaviour
         BrakeInput = 0;
     }
 
+    private void OnReset(InputAction.CallbackContext context)
+    {
+        raceManager.CarReset();
+    }
+
+    private void OnPauseMenu(InputAction.CallbackContext context)
+    {
+        escapeMenu.OpenMenu();
+    }
+
+    public void RaceStart()
+    {
+        KeySeting();
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using UnityEngine;
 
@@ -17,8 +18,12 @@ public class RacePresenter : MonoBehaviour, IRaceOutput
     public async void RadeyOutput(CancellationToken token)
     {
         controller.gameType = GameType.Radey;
+        try
+        {
         await radeyPresenter.Readey(token);
-        raceManager.GameStart();
+        }
+        catch(OperationCanceledException e){}
+        raceManager.RaceStart();
     }
 
     public void StartOutput(CancellationToken token)
@@ -29,9 +34,13 @@ public class RacePresenter : MonoBehaviour, IRaceOutput
 
     public void GoaleOutput(CancellationToken token)
     {
+<<<<<<< HEAD
         startPresenter.GameGoal();
         controller.gameType = GameType.Goal;
         goalPresenter.GameGoal();
+=======
+        goalPresenter.GoalPresenter();
+>>>>>>> gamepresenter
     }
 
 

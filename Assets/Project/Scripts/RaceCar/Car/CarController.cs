@@ -8,7 +8,7 @@ public enum GameType
     Goal
 }
 
-public class CarController : MonoBehaviour, IResetPostion
+public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,IRaceEnd
 {
     [SerializeField]
     private RaceManager raceManager;
@@ -29,8 +29,9 @@ public class CarController : MonoBehaviour, IResetPostion
     //現在のクルマの速度や角度
     public float slipAngle;
     public float speed;
-    private float resetTime = 0f;
     public float floatingTime = 5.0f;
+
+    private float resetTime = 0f;
     private Rigidbody playerRB;
 
     public void Inject(ICarRepository carRepository)
@@ -51,12 +52,16 @@ public class CarController : MonoBehaviour, IResetPostion
         if (gameType == GameType.Radey) { return; }
         if (gameType == GameType.Goal)
         {
+<<<<<<< HEAD
             ApplyBrake(999999999999999);
             ApplyMotor(0);
+=======
+            GameEnd();
+>>>>>>> gamepresenter
             return;
         }
-
-        if (colliders.FLWheel.isGrounded)
+        if (colliders.FLWheel.isGrounded&&colliders.FRWheel.isGrounded&&
+            colliders.RLWheel.isGrounded && colliders.RRWheel.isGrounded)
         {
             resetTime = 0f; 
         }
@@ -74,7 +79,11 @@ public class CarController : MonoBehaviour, IResetPostion
         speed = playerRB.velocity.magnitude * 3.5f;
         CheckInput();
         ApplyMotor(inputController.GasInput);
+<<<<<<< HEAD
         ApplySteering();
+=======
+        ApplySteering(inputController.SteeringInput);
+>>>>>>> gamepresenter
         ApplyBrake(inputController.BrakeInput);
         ApplyWheelPositions();
     }
@@ -102,15 +111,15 @@ public class CarController : MonoBehaviour, IResetPostion
         colliders.RLWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * gasInput;
     }
 
-    private void ApplySteering()
+    private void ApplySteering(float steeringInput)
     {
-        float steeringAngle = inputController.SteeringInput * carDeta.steeringCurve.Evaluate(speed);
+        float steeringAngle = steeringInput * carDeta.steeringCurve.Evaluate(speed);
 
-        if (slipAngle < 120f)
+        if (slipAngle > 4f)
         {
             steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up);
         }
-        steeringAngle = Mathf.Clamp(steeringAngle, -90, 90);
+        steeringAngle = Mathf.Clamp(steeringAngle, -60, 60);
         colliders.FRWheel.steerAngle = steeringAngle;
         colliders.FLWheel.steerAngle = steeringAngle;
     }
@@ -142,6 +151,32 @@ public class CarController : MonoBehaviour, IResetPostion
         playerRB.velocity = Vector3.zero;
         this.gameObject.transform.position = checkPointData.transform.position;
         this.transform.rotation = Quaternion.LookRotation(-checkPointData.transform.right);
+    }
+
+    public void GameEnd()
+    {
+        gameType = GameType.Goal;
+        playerRB.mass = 99999;
+        playerRB.freezeRotation = true;
+        ApplyBrake(999999999999999);
+        ApplyMotor(0);
+        ApplySteering(0);
+    }
+
+
+    public void RaceReadey()
+    {
+        gameType = GameType.Radey;
+    }
+
+    public void RaceStart()
+    {
+        gameType = GameType.Start;
+    }
+
+    public void RaceEnd()
+    {
+        gameType = GameType.Goal;
     }
 }
 

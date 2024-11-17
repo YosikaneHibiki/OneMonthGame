@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpeedMeter : MonoBehaviour
+public class SpeedMeter : MonoBehaviour ,IRaceEnd
 {
     [SerializeField]
     private RectTransform arrow;
@@ -20,6 +20,12 @@ public class SpeedMeter : MonoBehaviour
 
     [SerializeField]
     private TMP_Text text;
+
+
+    public void RaceEnd()
+    {
+        this.gameObject.SetActive(false);
+    }
 
     private void Update()
     {
