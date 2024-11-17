@@ -52,12 +52,7 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
         if (gameType == GameType.Radey) { return; }
         if (gameType == GameType.Goal)
         {
-<<<<<<< HEAD
-            ApplyBrake(999999999999999);
-            ApplyMotor(0);
-=======
             GameEnd();
->>>>>>> gamepresenter
             return;
         }
         if (colliders.FLWheel.isGrounded&&colliders.FRWheel.isGrounded&&
@@ -79,11 +74,7 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
         speed = playerRB.velocity.magnitude * 3.5f;
         CheckInput();
         ApplyMotor(inputController.GasInput);
-<<<<<<< HEAD
-        ApplySteering();
-=======
         ApplySteering(inputController.SteeringInput);
->>>>>>> gamepresenter
         ApplyBrake(inputController.BrakeInput);
         ApplyWheelPositions();
     }

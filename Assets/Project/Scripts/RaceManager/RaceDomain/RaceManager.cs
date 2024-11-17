@@ -28,11 +28,7 @@ public class RaceManager : MonoBehaviour
 
     public void RaceGoal()
     {
-<<<<<<< HEAD
-        raceInput.GameEnd();
-=======
         raceInput.RaceGoal();
->>>>>>> gamepresenter
     }
 
     public void CarReset()

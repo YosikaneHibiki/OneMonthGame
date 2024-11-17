@@ -47,11 +47,7 @@ public class DIScope : MonoBehaviour
     carController,raceReady.ToList(),raceStart.ToList(),raceEnd.ToList());
         sceneLoadGate.Inject(sceneLoad);
         carController.Inject(carDataAccess);
-<<<<<<< HEAD
-        raceManager.Inject(raceDomain,raceDomain);
-=======
         raceManager.Inject(raceDomain, raceDomain);
->>>>>>> gamepresenter
         #endregion
     }
 
