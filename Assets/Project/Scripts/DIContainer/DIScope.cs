@@ -10,6 +10,7 @@ public class DIScope : MonoBehaviour
     private RaceDomain raceDomain;
     private CarDataAccess carDataAccess;
     private SceneLoadUnity sceneLoad;
+    private AudioDataAccess audioDataAccess;
 
     private IEnumerable<IRaceReady> raceReady;
     private IEnumerable<IRaceStart> raceStart;
@@ -25,6 +26,10 @@ public class DIScope : MonoBehaviour
     private RaceManager raceManager;
     [SerializeField]
     private SceneLoadGate sceneLoadGate;
+    [SerializeField]
+    private AudioManager audioManager;
+    [SerializeField]
+    private AudioDataBase audioDataBase;
 
     private void Awake()
     {
@@ -40,7 +45,7 @@ public class DIScope : MonoBehaviour
     public void DIContainer()
     {
         #region DI専用コンテナ
-        
+        audioDataAccess = new(audioDataBase);
         carDataAccess = new CarDataAccess(carDataBase);
         sceneLoad = new SceneLoadUnity();
         raceDomain = new RaceDomain(cancellationToken, racePresenter, 
@@ -48,6 +53,7 @@ public class DIScope : MonoBehaviour
         sceneLoadGate.Inject(sceneLoad);
         carController.Inject(carDataAccess);
         raceManager.Inject(raceDomain, raceDomain);
+        audioManager.Inject(audioDataAccess);
         #endregion
     }
 

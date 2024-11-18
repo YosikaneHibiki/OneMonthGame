@@ -212,6 +212,54 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UIActionMap"",
+            ""id"": ""c18952ff-6357-4d5d-9f4a-0ffca1d583ed"",
+            ""actions"": [
+                {
+                    ""name"": ""SelectLeftAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed1b3444-b358-4779-b38f-1fa9b2267128"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectRigthtAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""40240cc4-15c1-434f-b262-fa06e5345da2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bbefe725-8343-4235-afef-1d8858f6d14b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectLeftAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fd31b3c-a33b-40d7-99d2-76815abbd57d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectRigthtAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -226,11 +274,16 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         m_CarActionMap_TestSystemAction = m_CarActionMap.FindAction("TestSystemAction", throwIfNotFound: true);
         m_CarActionMap_ResetKey = m_CarActionMap.FindAction("ResetKey", throwIfNotFound: true);
         m_CarActionMap_PauseButton = m_CarActionMap.FindAction("PauseButton", throwIfNotFound: true);
+        // UIActionMap
+        m_UIActionMap = asset.FindActionMap("UIActionMap", throwIfNotFound: true);
+        m_UIActionMap_SelectLeftAction = m_UIActionMap.FindAction("SelectLeftAction", throwIfNotFound: true);
+        m_UIActionMap_SelectRigthtAction = m_UIActionMap.FindAction("SelectRigthtAction", throwIfNotFound: true);
     }
 
     ~@CarAction()
     {
         UnityEngine.Debug.Assert(!m_CarActionMap.enabled, "This will cause a leak and performance issues, CarAction.CarActionMap.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UIActionMap.enabled, "This will cause a leak and performance issues, CarAction.UIActionMap.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -390,6 +443,60 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         }
     }
     public CarActionMapActions @CarActionMap => new CarActionMapActions(this);
+
+    // UIActionMap
+    private readonly InputActionMap m_UIActionMap;
+    private List<IUIActionMapActions> m_UIActionMapActionsCallbackInterfaces = new List<IUIActionMapActions>();
+    private readonly InputAction m_UIActionMap_SelectLeftAction;
+    private readonly InputAction m_UIActionMap_SelectRigthtAction;
+    public struct UIActionMapActions
+    {
+        private @CarAction m_Wrapper;
+        public UIActionMapActions(@CarAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SelectLeftAction => m_Wrapper.m_UIActionMap_SelectLeftAction;
+        public InputAction @SelectRigthtAction => m_Wrapper.m_UIActionMap_SelectRigthtAction;
+        public InputActionMap Get() { return m_Wrapper.m_UIActionMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActionMapActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActionMapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionMapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionMapActionsCallbackInterfaces.Add(instance);
+            @SelectLeftAction.started += instance.OnSelectLeftAction;
+            @SelectLeftAction.performed += instance.OnSelectLeftAction;
+            @SelectLeftAction.canceled += instance.OnSelectLeftAction;
+            @SelectRigthtAction.started += instance.OnSelectRigthtAction;
+            @SelectRigthtAction.performed += instance.OnSelectRigthtAction;
+            @SelectRigthtAction.canceled += instance.OnSelectRigthtAction;
+        }
+
+        private void UnregisterCallbacks(IUIActionMapActions instance)
+        {
+            @SelectLeftAction.started -= instance.OnSelectLeftAction;
+            @SelectLeftAction.performed -= instance.OnSelectLeftAction;
+            @SelectLeftAction.canceled -= instance.OnSelectLeftAction;
+            @SelectRigthtAction.started -= instance.OnSelectRigthtAction;
+            @SelectRigthtAction.performed -= instance.OnSelectRigthtAction;
+            @SelectRigthtAction.canceled -= instance.OnSelectRigthtAction;
+        }
+
+        public void RemoveCallbacks(IUIActionMapActions instance)
+        {
+            if (m_Wrapper.m_UIActionMapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActionMapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionMapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionMapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActionMapActions @UIActionMap => new UIActionMapActions(this);
     public interface ICarActionMapActions
     {
         void OnMoveAction(InputAction.CallbackContext context);
@@ -400,5 +507,10 @@ public partial class @CarAction: IInputActionCollection2, IDisposable
         void OnTestSystemAction(InputAction.CallbackContext context);
         void OnResetKey(InputAction.CallbackContext context);
         void OnPauseButton(InputAction.CallbackContext context);
+    }
+    public interface IUIActionMapActions
+    {
+        void OnSelectLeftAction(InputAction.CallbackContext context);
+        void OnSelectRigthtAction(InputAction.CallbackContext context);
     }
 }

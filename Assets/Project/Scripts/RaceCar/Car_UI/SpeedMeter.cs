@@ -32,6 +32,7 @@ public class SpeedMeter : MonoBehaviour ,IRaceEnd
         int speedText =Mathf.RoundToInt(carController.speed);
         text.text = speedText.ToString() ;
         arrow.localEulerAngles = new Vector3( 0, 0, Mathf.Lerp(minMeterRotation, maxMeterRotation, carController.speed / carController.MaxSpeed));
+        currentMeterRotation = new Vector3(0, 0, Mathf.Lerp(minMeterRotation, maxMeterRotation, carController.speed / carController.MaxSpeed)).z;
     }
 
 }

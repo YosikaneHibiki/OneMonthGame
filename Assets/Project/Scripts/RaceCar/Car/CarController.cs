@@ -11,12 +11,15 @@ public enum GameType
 public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,IRaceEnd
 {
     [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
     private RaceManager raceManager;
     [SerializeField]
     private CarInputController inputController;
     [SerializeField]
     private CarID carID;
     private CarData carDeta;
+    private AudioManager audioManager;
 
     //クルマのデータ
     public float MaxSpeed { get; private set; }
@@ -42,13 +45,17 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
     private void Start()
     {
         carDeta = carRepository.FindCar(carID.Id);
-
+        audioManager = AudioManager.Instance;
+        audioManager.PlaySFX("15 EngA_06589",audioSource);
         MaxSpeed = carDeta.maxSpeed;
         playerRB = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
+;
+
+        audioManager.PitchChange(audioSource,Mathf.Lerp(0f,2f,speed/180f));
         if (gameType == GameType.Radey) { return; }
         if (gameType == GameType.Goal)
         {
@@ -108,9 +115,9 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
 
         if (slipAngle > 4f)
         {
-            steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up);
+            steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up)*0.85f;
         }
-        steeringAngle = Mathf.Clamp(steeringAngle, -60, 60);
+        steeringAngle = Mathf.Clamp(steeringAngle, -90, 90);
         colliders.FRWheel.steerAngle = steeringAngle;
         colliders.FLWheel.steerAngle = steeringAngle;
     }

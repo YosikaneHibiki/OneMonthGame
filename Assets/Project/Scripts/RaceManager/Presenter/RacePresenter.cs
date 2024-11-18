@@ -34,7 +34,7 @@ public class RacePresenter : MonoBehaviour, IRaceOutput
 
     public void GoaleOutput(CancellationToken token)
     {
-        goalPresenter.GameGoal();
+        goalPresenter.GameGoal(token);
     }
 
 

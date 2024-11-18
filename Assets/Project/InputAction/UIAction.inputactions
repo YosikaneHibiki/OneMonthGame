@@ -1,0 +1,74 @@
+{
+    "name": "UIAction",
+    "maps": [
+        {
+            "name": "UIActionMap",
+            "id": "cf17ba62-c0ec-432d-a6f1-acbcbf9d31f2",
+            "actions": [
+                {
+                    "name": "LeftSelectAction",
+                    "type": "Button",
+                    "id": "3324f8a8-13bc-4613-86ec-3b923eb8f1ea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightSelectAction",
+                    "type": "Button",
+                    "id": "745455d5-6a55-4134-8748-0f7423d3350c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectAction",
+                    "type": "Button",
+                    "id": "0dd2c641-fc44-400a-9e47-75e89a0506eb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7a3f50a1-5b93-4ce7-8d6e-a28176de3414",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftSelectAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86c9911a-05e2-45fe-b552-fe9a0319487c",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightSelectAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23bbb6b8-e4f6-4194-9bfa-ddbbb861d7de",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
