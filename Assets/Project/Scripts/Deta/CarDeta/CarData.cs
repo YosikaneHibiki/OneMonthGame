@@ -13,6 +13,7 @@ public class CarData : ScriptableObject
     public float brakePower;
     public float maxSpeed;
     public AnimationCurve steeringCurve;
+    public GameObject CarPrefab;
 
     [Range(0f, 1f)]
     public float Torque;

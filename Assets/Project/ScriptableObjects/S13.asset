@@ -50,6 +50,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  CarPrefab: {fileID: 913791274868359639, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
   Torque: 1
   FrontTorque: 0
   RiaTorque: 1

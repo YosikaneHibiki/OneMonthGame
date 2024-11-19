@@ -33,6 +33,8 @@ public class DIScope : MonoBehaviour
     private AudioDataBase audioDataBase;
     [SerializeField]
     private GameManager gameManager;
+    [SerializeField]
+    private RaceStartPoint raceStartPoint;
 
     private void Awake()
     {
@@ -58,6 +60,7 @@ public class DIScope : MonoBehaviour
         raceManager.Inject(raceDomain, raceDomain);
         audioManager.Inject(audioDataAccess);
         gameManager.Inject(racePause.ToList());
+        raceStartPoint.Inject(carDataAccess);
         #endregion
     }
 
