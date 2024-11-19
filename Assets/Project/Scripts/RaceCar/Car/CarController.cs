@@ -8,7 +8,7 @@ public enum GameType
     Goal
 }
 
-public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,IRaceEnd
+public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,IRaceEnd ,IRacePause
 {
     [SerializeField]
     private AudioSource audioSource;
@@ -53,8 +53,6 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
 
     private void Update()
     {
-;
-
         audioManager.PitchChange(audioSource,Mathf.Lerp(0f,2f,speed/180f));
         if (gameType == GameType.Radey) { return; }
         if (gameType == GameType.Goal)
@@ -175,6 +173,16 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
     public void RaceEnd()
     {
         gameType = GameType.Goal;
+    }
+
+    public void Pause()
+    {
+        audioSource.Pause();
+    }
+
+    public void PauseCancel()
+    {
+        audioSource.UnPause();
     }
 }
 

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465f002d5125f724185bdc2e781eadc4, type: 3}
   m_Name: AudioDataBase
   m_EditorClassIdentifier: 
-  BGM: []
+  BGM:
+  - {fileID: 8300000, guid: 429ba78baf0fb3d4dba5d76ffbad3cd0, type: 3}
   SFX:
   - {fileID: 8300000, guid: 6956fa90b7a9c1344aa84bf4ea1ad26d, type: 3}
+  - {fileID: 8300000, guid: 409201a38f989f9428c423ebabacc73d, type: 3}

@@ -15,23 +15,28 @@ public class EscapeMenu : MonoBehaviour
     private Button QuitButton;
 
     private SceneLoadGate sceneLoadGate;
+    private AudioManager audioManager;
 
-    private void Start()
+    private void Awake()
     {
         sceneLoadGate  = SceneLoadGate.Instance;
+        audioManager = AudioManager.Instance;
         ContinueButton.onClick.AddListener(Continue);
         ResetButton.onClick.AddListener(ReStart);
+        QuitButton.onClick.AddListener(Quit);
     }
 
     public void OpenMenu()
     {
         if(this.gameObject.activeSelf == false)
         {
-            gameManager.Pause();
             this.gameObject.SetActive(true);
+            gameManager.Pause();
+            audioManager.VolumeChange(0.3f);
         }
         else
         {
+            audioManager.VolumeChange(1);
             Continue();
         }
     }
@@ -52,7 +57,7 @@ public class EscapeMenu : MonoBehaviour
 
     private void Quit()
     {
-
+        sceneLoadGate.SceneLoad("TitleScene");
     }
 
 

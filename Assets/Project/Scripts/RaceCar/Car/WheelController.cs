@@ -7,6 +7,7 @@ public class WheelController : MonoBehaviour
     private WheelCollider wheelCollider;
     private WheelFrictionCurve wheelFrictionCurve;
     private WheelFrictionCurve defaltWheelFruction;
+    private ParticleSystem smokeEfect;
     public float SlipValue {  get; private set; }
 
 
@@ -14,6 +15,7 @@ public class WheelController : MonoBehaviour
     {
         wheelCollider = GetComponent<WheelCollider>();
         defaltWheelFruction = wheelCollider.sidewaysFriction;
+        smokeEfect = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Update()
@@ -24,6 +26,7 @@ public class WheelController : MonoBehaviour
 
         if (SlipValue > 0.4)
         {
+            smokeEfect.Play();
             Debug.Log("スライドを検知" + SlipValue);
             wheelFrictionCurve = wheelCollider.sidewaysFriction;
             wheelFrictionCurve.stiffness = 1f;
@@ -36,6 +39,7 @@ public class WheelController : MonoBehaviour
         else
         {
             wheelCollider.sidewaysFriction = defaltWheelFruction;
+            smokeEfect.Pause();
         }
 
     }

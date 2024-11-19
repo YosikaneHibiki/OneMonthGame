@@ -19,9 +19,9 @@ public class GameRadeyPresenter : MonoBehaviour
         countDownText.text = "2";
         await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
         countDownText.text = "1";
-        await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: token);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.4f), cancellationToken: token);
         countDownText.text = "Go";
-        await UniTask.Delay(TimeSpan.FromSeconds(0.4));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.4f));
         countDownText.enabled = false;
     }
 

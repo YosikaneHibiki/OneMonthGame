@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+
+    [SerializeField]
+    private AudioSource audioSourceBGM;
 
     private IAudioRepository audioRepository;
 
@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -26,13 +26,33 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayBGM(AudioSource audioSource,string bgmName)
+    private void Start()
     {
-        var clip = audioRepository.FindBGM(bgmName);
-        audioSource.clip = clip;
-        audioSource.Play();
+        audioSourceBGM = GetComponentInChildren<AudioSource>();
     }
-    
+
+    public void PlayBGM(string bgmName)
+    {
+        var clip = audioRepository.FindBGM(bgmName) ?? throw new System.Exception("BGMÇ™ë∂ç›ÇµÇ»Ç¢");
+        audioSourceBGM.clip = clip;
+        audioSourceBGM.Play();
+    }
+
+    public void StopBGM()
+    {
+        audioSourceBGM.Stop();
+    }
+
+    public void PitchChange(float pitch)
+    {
+        audioSourceBGM.pitch = pitch;
+    }
+
+    public void VolumeChange(float Volume)
+    {
+        audioSourceBGM.volume = Volume;
+    }
+
     public void PitchChange(AudioSource audioSource, float AudioPitch)
     {
         audioSource.pitch = AudioPitch;
@@ -42,7 +62,7 @@ public class AudioManager : MonoBehaviour
         source.volume = Volume;
     }
 
-    public void PlaySFX(string sfxName,AudioSource audioSource)
+    public void PlaySFX(string sfxName, AudioSource audioSource)
     {
         var clip = audioRepository.FindSFX(sfxName);
         audioSource.clip = clip;

@@ -190,54 +190,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "UIActionMap",
-            "id": "c18952ff-6357-4d5d-9f4a-0ffca1d583ed",
-            "actions": [
-                {
-                    "name": "SelectLeftAction",
-                    "type": "Button",
-                    "id": "ed1b3444-b358-4779-b38f-1fa9b2267128",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectRigthtAction",
-                    "type": "Button",
-                    "id": "40240cc4-15c1-434f-b262-fa06e5345da2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "bbefe725-8343-4235-afef-1d8858f6d14b",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SelectLeftAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0fd31b3c-a33b-40d7-99d2-76815abbd57d",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SelectRigthtAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
         }
     ],
     "controlSchemes": []

@@ -15,6 +15,7 @@ public class DIScope : MonoBehaviour
     private IEnumerable<IRaceReady> raceReady;
     private IEnumerable<IRaceStart> raceStart;
     private IEnumerable<IRaceEnd> raceEnd;
+    private IEnumerable<IRacePause> racePause;
  
     [SerializeField]
     private CarController carController;
@@ -30,15 +31,17 @@ public class DIScope : MonoBehaviour
     private AudioManager audioManager;
     [SerializeField]
     private AudioDataBase audioDataBase;
+    [SerializeField]
+    private GameManager gameManager;
 
     private void Awake()
     {
         raceReady = FindObjectsOfType<MonoBehaviour>().OfType<IRaceReady>();
         raceStart = FindObjectsOfType<MonoBehaviour>().OfType<IRaceStart>();
         raceEnd = FindObjectsOfType<MonoBehaviour>().OfType<IRaceEnd>();
+        racePause = FindObjectsOfType<MonoBehaviour>().OfType<IRacePause>();
         cancellationTokenSource = new CancellationTokenSource();
         cancellationToken = cancellationTokenSource.Token;
-
         DIContainer();
     }
 
@@ -49,11 +52,12 @@ public class DIScope : MonoBehaviour
         carDataAccess = new CarDataAccess(carDataBase);
         sceneLoad = new SceneLoadUnity();
         raceDomain = new RaceDomain(cancellationToken, racePresenter, 
-    carController,raceReady.ToList(),raceStart.ToList(),raceEnd.ToList());
+        carController,raceReady.ToList(),raceStart.ToList(),raceEnd.ToList());
         sceneLoadGate.Inject(sceneLoad);
         carController.Inject(carDataAccess);
         raceManager.Inject(raceDomain, raceDomain);
         audioManager.Inject(audioDataAccess);
+        gameManager.Inject(racePause.ToList());
         #endregion
     }
 
