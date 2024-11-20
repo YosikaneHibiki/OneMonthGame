@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarInputController : MonoBehaviour, IRaceStart
+public class CarInputController : MonoBehaviour, IRaceStart , IRacePause
 {
-    [SerializeField]
+
     private RaceManager raceManager;
-    [SerializeField]
-    private EscapeMenu escapeMenu;
+    private GameManager gameManager;
 
     private CarAction carAction;
     private CarAction.CarActionMapActions carActionMapActions;
+    private bool isMenuOpen = false;
 
     public float GasInput { get; private set; }
     public float BrakeInput { get; private set; }
@@ -21,7 +21,13 @@ public class CarInputController : MonoBehaviour, IRaceStart
         carActionMapActions = carAction.CarActionMap;
     }
 
-    private void KeySeting()
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+        raceManager = RaceManager.Instance;
+    }
+
+    public void KeySeting()
     {
         carActionMapActions.PauseButton.started += OnPauseMenu;
         carActionMapActions.ResetKey.started += OnReset;
@@ -70,11 +76,28 @@ public class CarInputController : MonoBehaviour, IRaceStart
 
     private void OnPauseMenu(InputAction.CallbackContext context)
     {
-        escapeMenu.OpenMenu();
+        if(gameManager.isMenuOpen ==false)
+        {
+            gameManager.Pause();
+        }
+        else
+        {
+            gameManager.PauseCancel();
+        }
     }
 
     public void RaceStart()
     {
         KeySeting();
+    }
+
+    public void Pause()
+    {
+        isMenuOpen = true;
+    }
+
+    public void PauseCancel()
+    {
+        isMenuOpen = false;
     }
 }

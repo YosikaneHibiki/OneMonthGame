@@ -11,13 +11,10 @@ public class RacePresenter : MonoBehaviour, IRaceOutput
     [SerializeField]
     private GameStartPresenter startPresenter;
     [SerializeField]
-    private CarController controller;
-    [SerializeField]
     private RaceManager raceManager;
 
     public async void RadeyOutput(CancellationToken token)
     {
-        controller.gameType = GameType.Radey;
         try
         {
         await radeyPresenter.Readey(token);
@@ -28,7 +25,6 @@ public class RacePresenter : MonoBehaviour, IRaceOutput
 
     public void StartOutput(CancellationToken token)
     {
-        controller.gameType = GameType.Start;
         startPresenter.GameStart();
     }
 

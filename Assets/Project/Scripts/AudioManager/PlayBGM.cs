@@ -13,7 +13,6 @@ public class PlayBGM : MonoBehaviour , IRaceStart
 
     public void RaceStart()
     {
-        Debug.Log("Play");
         audioManager.PlayBGM("initialD BGM");
     }
 }

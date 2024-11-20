@@ -3,50 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EscapeMenu : MonoBehaviour
+public class EscapeMenu : MonoBehaviour , IRacePause
 {
-    [SerializeField]
-    private GameManager gameManager;
+
     [SerializeField]
     private Button ContinueButton;
     [SerializeField]
     private Button ResetButton;
     [SerializeField]
     private Button QuitButton;
+    [SerializeField]
+    private GameObject menu;
 
+    [SerializeField]
+    private GameManager gameManager;
     private SceneLoadGate sceneLoadGate;
     private AudioManager audioManager;
 
-    private void Awake()
+    private void Start()
     {
-        sceneLoadGate  = SceneLoadGate.Instance;
+        sceneLoadGate = SceneLoadGate.Instance;
+        gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
         ContinueButton.onClick.AddListener(Continue);
         ResetButton.onClick.AddListener(ReStart);
         QuitButton.onClick.AddListener(Quit);
     }
 
-    public void OpenMenu()
-    {
-        if(this.gameObject.activeSelf == false)
-        {
-            this.gameObject.SetActive(true);
-            gameManager.Pause();
-            audioManager.VolumeChange(0.3f);
-        }
-        else
-        {
-            audioManager.VolumeChange(1);
-            Continue();
-        }
-    }
 
     private void Continue()
     {
         if(this.gameObject.activeSelf)
         {
             gameManager.PauseCancel();
-            this.gameObject.SetActive(false);
+            menu.SetActive(false);
         }
     }
 
@@ -60,7 +50,17 @@ public class EscapeMenu : MonoBehaviour
         sceneLoadGate.SceneLoad("TitleScene");
     }
 
+    public void Pause()
+    {
+        Debug.Log("Pause");
+        menu.SetActive(true);
+        audioManager.VolumeChange(0.3f);
+    }
 
-
-
+    public void PauseCancel()
+    {
+        Debug.Log("UnPause");
+        audioManager.VolumeChange(1);
+        menu.SetActive(false);
+    }
 }

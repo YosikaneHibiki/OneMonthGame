@@ -16,13 +16,15 @@ public class DIScope : MonoBehaviour
     private IEnumerable<IRaceStart> raceStart;
     private IEnumerable<IRaceEnd> raceEnd;
     private IEnumerable<IRacePause> racePause;
- 
+
     [SerializeField]
-    private CarController carController;
-    [SerializeField]
-    private RacePresenter racePresenter;
+    private AudioDataBase audioDataBase;
     [SerializeField]
     private CarDataBase carDataBase;
+    [SerializeField]
+    private CarReset carReset;
+    [SerializeField]
+    private RacePresenter racePresenter;
     [SerializeField]
     private RaceManager raceManager;
     [SerializeField]
@@ -30,24 +32,22 @@ public class DIScope : MonoBehaviour
     [SerializeField]
     private AudioManager audioManager;
     [SerializeField]
-    private AudioDataBase audioDataBase;
-    [SerializeField]
     private GameManager gameManager;
-    //[SerializeField]
-    //private RaceStartPoint raceStartPoint;
-    //[SerializeField]
-    //private RaceEntoryPoint raceEntoryPoint;
+    [SerializeField]
+    private RaceStartPoint raceStartPoint;
+    [SerializeField]
+    private RaceEntoryPoint raceEntoryPoint;
 
     private void Awake()
     {
+        cancellationTokenSource = new CancellationTokenSource();
+        cancellationToken = cancellationTokenSource.Token;
         raceReady = FindObjectsOfType<MonoBehaviour>().OfType<IRaceReady>();
         raceStart = FindObjectsOfType<MonoBehaviour>().OfType<IRaceStart>();
         raceEnd = FindObjectsOfType<MonoBehaviour>().OfType<IRaceEnd>();
         racePause = FindObjectsOfType<MonoBehaviour>().OfType<IRacePause>();
-        cancellationTokenSource = new CancellationTokenSource();
-        cancellationToken = cancellationTokenSource.Token;
         DIContainer();
-        //raceEntoryPoint.Entory();
+        raceEntoryPoint.Entory();
     }
 
     public void DIContainer()
@@ -57,13 +57,12 @@ public class DIScope : MonoBehaviour
         carDataAccess = new CarDataAccess(carDataBase);
         sceneLoad = new SceneLoadUnity();
         raceDomain = new RaceDomain(cancellationToken, racePresenter,
-        carController, raceReady.ToList(), raceStart.ToList(), raceEnd.ToList());
+        carReset, raceReady.ToList(), raceStart.ToList(), raceEnd.ToList());
         sceneLoadGate.Inject(sceneLoad);
-        carController.Inject(carDataAccess);
         raceManager.Inject(raceDomain, raceDomain);
         audioManager.Inject(audioDataAccess);
         gameManager.Inject(racePause.ToList());
-        //raceStartPoint.Inject(carDataAccess);
+        raceStartPoint.Inject(carDataAccess);
         #endregion
     }
     private void OnDestroy()

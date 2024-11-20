@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public enum GameType
@@ -8,18 +7,18 @@ public enum GameType
     Goal
 }
 
-public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,IRaceEnd ,IRacePause
+public class CarController : MonoBehaviour
 {
     [SerializeField]
-    private AudioSource audioSource;
-    [SerializeField]
-    private RaceManager raceManager;
-    [SerializeField]
-    private CarInputController inputController;
-    [SerializeField]
     private CarID carID;
-    private CarData carDeta;
+
+    private CarInputController inputController;
+    private AudioSource audioSource;
+    private RaceManager raceManager;
+    private CarParameter carParameter;
     private AudioManager audioManager;
+    private float resetTime = 0f;
+    private Rigidbody playerRB;
 
     //クルマのデータ
     public float MaxSpeed { get; private set; }
@@ -27,61 +26,65 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
     public WheelColliders colliders;
     public WheelMeshes wheelMeshes;
     //クルマののドメイン
-    private ICarRepository carRepository;
     public GameType gameType;
     //現在のクルマの速度や角度
     public float slipAngle;
     public float speed;
     public float floatingTime = 5.0f;
 
-    private float resetTime = 0f;
-    private Rigidbody playerRB;
-
-    public void Inject(ICarRepository carRepository)
+    public void SetParameter(CarParameter carParameter)
     {
-        this.carRepository = carRepository;
+        this.carParameter = carParameter;
     }
 
     private void Start()
     {
-        carDeta = carRepository.FindCar(carID.Id);
+
+        raceManager = RaceManager.Instance;
         audioManager = AudioManager.Instance;
-        audioManager.PlaySFX("15 EngA_06589",audioSource);
-        MaxSpeed = carDeta.maxSpeed;
+        inputController = gameObject.GetComponent<CarInputController>();
+        audioSource = gameObject.GetComponent<AudioSource>();
         playerRB = gameObject.GetComponent<Rigidbody>();
+        audioManager.PlaySFX("15 EngA_06589", audioSource);
+        MaxSpeed = carParameter.maxSpeed;
     }
 
     private void Update()
     {
-        audioManager.PitchChange(audioSource,Mathf.Lerp(0f,2f,speed/180f));
+        audioManager.PitchChange(audioSource, Mathf.Lerp(0f, 2f, speed / 180f));
         if (gameType == GameType.Radey) { return; }
         if (gameType == GameType.Goal)
         {
             GameEnd();
             return;
         }
-        if (colliders.FLWheel.isGrounded&&colliders.FRWheel.isGrounded&&
+
+        speed = playerRB.velocity.magnitude * 3.5f;
+        GroundCheck();
+        CheckInput();
+        ApplyMotor(inputController.GasInput);
+        ApplySteering(inputController.SteeringInput);
+        ApplyBrake(inputController.BrakeInput);
+        ApplyWheelPositions();
+    }
+
+    private void GroundCheck()
+    {
+        if (colliders.FLWheel.isGrounded && colliders.FRWheel.isGrounded &&
             colliders.RLWheel.isGrounded && colliders.RRWheel.isGrounded)
         {
-            resetTime = 0f; 
+            resetTime = 0f;
         }
         else
         {
             resetTime += Time.deltaTime;
         }
 
-        if(resetTime >= floatingTime)
+        if (resetTime >= floatingTime)
         {
             resetTime = 0;
             raceManager.CarReset();
         }
-
-        speed = playerRB.velocity.magnitude * 3.5f;
-        CheckInput();
-        ApplyMotor(inputController.GasInput);
-        ApplySteering(inputController.SteeringInput);
-        ApplyBrake(inputController.BrakeInput);
-        ApplyWheelPositions();
     }
 
     private void CheckInput()
@@ -91,29 +94,30 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
 
     private void ApplyBrake(float brakeInput)
     {
-        colliders.FRWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.7f;
-        colliders.FLWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.7f;
+        colliders.FRWheel.brakeTorque = brakeInput * carParameter.brakePower * 0.7f;
+        colliders.FLWheel.brakeTorque = brakeInput * carParameter.brakePower * 0.7f;
 
-        colliders.RRWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.3f;
-        colliders.RLWheel.brakeTorque = brakeInput * carDeta.brakePower * 0.3f;
+        colliders.RRWheel.brakeTorque = brakeInput * carParameter.brakePower * 0.3f;
+        colliders.RLWheel.brakeTorque = brakeInput * carParameter.brakePower * 0.3f;
     }
 
     private void ApplyMotor(float gasInput)
     {
 
-        colliders.FLWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * gasInput;
-        colliders.FRWheel.motorTorque = carDeta.motorPower * carDeta.FrontTorque * gasInput;
-        colliders.RRWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * gasInput;
-        colliders.RLWheel.motorTorque = carDeta.motorPower * carDeta.RiaTorque * gasInput;
+        colliders.FLWheel.motorTorque = carParameter.motorPower * carParameter.FrontTorque * gasInput;
+        colliders.FRWheel.motorTorque = carParameter.motorPower * carParameter.FrontTorque * gasInput;
+        colliders.RRWheel.motorTorque = carParameter.motorPower * carParameter.RiaTorque * gasInput;
+        colliders.RLWheel.motorTorque = carParameter.motorPower * carParameter.RiaTorque * gasInput;
     }
 
     private void ApplySteering(float steeringInput)
     {
-        float steeringAngle = steeringInput * carDeta.steeringCurve.Evaluate(speed);
+        float steeringAngle = steeringInput * carParameter.steeringCurve.Evaluate(speed);
 
         if (slipAngle > 4f)
         {
-            steeringAngle += Vector3.SignedAngle(transform.forward, playerRB.velocity + transform.forward, Vector3.up)*0.85f;
+            steeringAngle += Vector3.SignedAngle
+                (transform.forward, playerRB.velocity + transform.forward, Vector3.up) * 0.75f;
         }
         steeringAngle = Mathf.Clamp(steeringAngle, -90, 90);
         colliders.FRWheel.steerAngle = steeringAngle;
@@ -135,11 +139,6 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
         coll.GetWorldPose(out position, out quat);
         wheelMesh.transform.position = position;
         wheelMesh.transform.rotation = quat;
-    }
-
-    public void ChecekPoint(CheckPointData checkPointData)
-    {
-        raceManager.Checkpoint(checkPointData);
     }
 
     public void ResetPostion(CheckPointData checkPointData)
@@ -168,6 +167,7 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
     public void RaceStart()
     {
         gameType = GameType.Start;
+        inputController.KeySeting();
     }
 
     public void RaceEnd()

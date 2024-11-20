@@ -6,14 +6,30 @@ public class GameManager : MonoBehaviour
 {
     private List<IRacePause> racePauses;
 
+    public static GameManager Instance;
+    public bool isMenuOpen;
+
     public void Inject(List<IRacePause> racePauses)
     {
         this.racePauses = racePauses;
     }
 
+    public void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void Pause()
     {
         Time.timeScale = 0f;
+        isMenuOpen = true;
         foreach(var racePauses in racePauses)
         {
             racePauses.Pause();
@@ -22,7 +38,8 @@ public class GameManager : MonoBehaviour
     public void PauseCancel()
     {
         Time.timeScale = 1f;
-        foreach(var racePauses in racePauses)
+        isMenuOpen = false;
+        foreach (var racePauses in racePauses)
         {
             racePauses.PauseCancel();
         }

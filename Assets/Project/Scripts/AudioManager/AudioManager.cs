@@ -4,7 +4,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [SerializeField]
+
     private AudioSource audioSourceBGM;
 
     private IAudioRepository audioRepository;
@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBGM(string bgmName)
     {
-        var clip = audioRepository.FindBGM(bgmName) ?? throw new System.Exception("BGMÇ™ë∂ç›ÇµÇ»Ç¢");
+        var clip = audioRepository.FindBGM(bgmName);
         audioSourceBGM.clip = clip;
         audioSourceBGM.Play();
     }
