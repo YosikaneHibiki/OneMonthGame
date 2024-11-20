@@ -17,10 +17,11 @@ public class RaceStartPoint : MonoBehaviour
 
     public void CreateCar(string carId)
     {
-        if(carId == string.Empty)
+        if(carId == null)
         {
             carId = carDefaltID.Id;
         }
+
 
         var carData = carRepository.FindCar(carId);
         Instantiate(carData.CarPrefab,startPoint.transform.position,Quaternion.identity);

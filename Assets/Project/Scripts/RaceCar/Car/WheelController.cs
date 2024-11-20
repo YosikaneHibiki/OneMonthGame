@@ -27,7 +27,7 @@ public class WheelController : MonoBehaviour
         if (SlipValue > 0.4)
         {
             smokeEfect.Play();
-            Debug.Log("スライドを検知" + SlipValue);
+            Debug.Log("スライドを検知");
             wheelFrictionCurve = wheelCollider.sidewaysFriction;
             wheelFrictionCurve.stiffness = 1f;
             wheelFrictionCurve.extremumSlip =0.8f;

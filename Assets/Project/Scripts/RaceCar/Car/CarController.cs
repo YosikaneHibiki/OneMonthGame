@@ -44,6 +44,7 @@ public class CarController : MonoBehaviour, IResetPostion,IRaceReady,IRaceStart,
 
     private void Start()
     {
+        //Ô‚Ìrepository‚ğ•ÏX
         carDeta = carRepository.FindCar(carID.Id);
         audioManager = AudioManager.Instance;
         audioManager.PlaySFX("15 EngA_06589",audioSource);
