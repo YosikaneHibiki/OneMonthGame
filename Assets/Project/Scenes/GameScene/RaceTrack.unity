@@ -3514,6 +3514,52 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
+--- !u!1 &1688413877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1688413879}
+  - component: {fileID: 1688413880}
+  m_Layer: 0
+  m_Name: GameEntoryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1688413879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688413877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 880.6716, y: 454.37067, z: -7.7187233}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1688413880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688413877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7607965f281ae3499f477fc22185f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {fileID: 1611987554}
+  carID: {fileID: 11400000, guid: 98562e5ec50dae94ca0488b2d9bd854c, type: 2}
 --- !u!1 &1693397186
 GameObject:
   m_ObjectHideFlags: 0
@@ -5711,9 +5757,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 847689278238852694, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 913791274868359639, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
       propertyPath: m_Name
       value: Simple Retro Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 913791274868359639, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027851680249864081, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483859570854172214, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7272994491044956580, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5763,6 +5825,10 @@ PrefabInstance:
       propertyPath: raceManager
       value: 
       objectReference: {fileID: 161577304}
+    - target: {fileID: 8074722003838781168, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8255006067409378580, guid: fb5c7610a9d7f9844b86c63bd48645b0, type: 3}
       propertyPath: raceManager
       value: 
@@ -6821,6 +6887,10 @@ PrefabInstance:
       propertyPath: raceStartPoint
       value: 
       objectReference: {fileID: 1611987554}
+    - target: {fileID: 2722836303257785250, guid: a1de194143e03f043af1d1b0e8cf32ec, type: 3}
+      propertyPath: raceEntoryPoint
+      value: 
+      objectReference: {fileID: 1688413880}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7020,6 +7090,7 @@ SceneRoots:
   - {fileID: 1578188288}
   - {fileID: 354533038}
   - {fileID: 958869304}
+  - {fileID: 1688413879}
   - {fileID: 8739469382670485112}
   - {fileID: 161577305}
   - {fileID: 565609376}

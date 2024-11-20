@@ -7,7 +7,7 @@ public class RaceEntoryPoint : MonoBehaviour
     [SerializeField]
     private RaceStartPoint startPoint;
     public CarID carID;
-    private void Start()
+    public void Entory()
     {
         startPoint.CreateCar(carID.Id);
     }

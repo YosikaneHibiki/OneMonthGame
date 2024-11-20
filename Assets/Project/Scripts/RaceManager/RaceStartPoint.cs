@@ -24,6 +24,7 @@ public class RaceStartPoint : MonoBehaviour
 
 
         var carData = carRepository.FindCar(carId);
-        Instantiate(carData.CarPrefab,startPoint.transform.position,Quaternion.identity);
+        var carObject = Instantiate(carData.CarPrefab,startPoint.transform.position,Quaternion.identity);
+        carObject.GetComponent<CarController>().Inject(carRepository);
     }
 }
