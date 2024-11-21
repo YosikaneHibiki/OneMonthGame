@@ -31,10 +31,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913791274868359639}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.70760024, z: 0, w: 0.70661294}
-  m_LocalPosition: {x: 36.83316, y: -0.00002193451, z: -29.055197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1937188619272581500}
   - {fileID: 9222586178041895548}
@@ -42,10 +42,11 @@ Transform:
   - {fileID: 582649378003102186}
   - {fileID: 4397854912917307715}
   - {fileID: 8073880302859175677}
+  - {fileID: 3881822028565181202}
   - {fileID: 84344646317775293}
   - {fileID: 2061778092374610660}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90.08, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6577596957787479250
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -112,8 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df01c4c91b848c04b905af08f5e3931d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceManager: {fileID: 0}
-  escapeMenu: {fileID: 0}
 --- !u!114 &6679715951819074969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +460,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1182310098845102599}
-  - {fileID: 3881822028565181202}
   m_Father: {fileID: 7272994491044956580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &6676918234391519359
@@ -625,12 +623,12 @@ Transform:
   m_GameObject: {fileID: 4722704627927723249}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4999992, y: 0, z: -2.5216794}
+  m_LocalPosition: {x: -0.75, y: 0.32624584, z: -1.052515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4977077874667729461}
-  m_Father: {fileID: 84344646317775293}
+  m_Father: {fileID: 7272994491044956580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &7433186391329738130
 WheelCollider:

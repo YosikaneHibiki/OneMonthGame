@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carDetaBase:
   - {fileID: 11400000, guid: e47558c8141fb7140a98d914a197f1db, type: 2}
+  - {fileID: 11400000, guid: 975871e624e1d4c40b6b591b9e297e83, type: 2}
+  - {fileID: 11400000, guid: fdeac0e0ae6d8e046b39ac2c9f290d7b, type: 2}
+  - {fileID: 11400000, guid: 44dc711243c1ac54989e45f291d9f92c, type: 2}
+  - {fileID: 11400000, guid: 91406101a45468743abece6598e9c759, type: 2}

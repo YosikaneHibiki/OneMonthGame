@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaceStartPoint : MonoBehaviour, IRaceReady, IRaceStart, IRaceEnd, IRacePause
+public class RaceStartPoint : MonoBehaviour
 {
+    [SerializeField]
+    private Transform lookTransform;
     [SerializeField]
     private Transform startPoint;
     [SerializeField]
@@ -15,9 +17,9 @@ public class RaceStartPoint : MonoBehaviour, IRaceReady, IRaceStart, IRaceEnd, I
     private CinemachineVirtualCamera virtualCamera;
     [SerializeField]
     private CarReset carReset;
+    [SerializeField]
+    private CarEvent carEvent;
     
-    private CarController carController;
-
     private ICarRepository carRepository;
 
     public void Inject(ICarRepository carRepository)
@@ -31,43 +33,20 @@ public class RaceStartPoint : MonoBehaviour, IRaceReady, IRaceStart, IRaceEnd, I
         {
             carId = carDefaltID.Id;
         }
-
-
         var carData = carRepository.FindCar(carId);
         var carParameter = new CarParameter(carData);
-        var carObject = Instantiate(carData.CarPrefab,startPoint.transform.position,Quaternion.identity);
+        var carObject = Instantiate(carData.CarPrefab,startPoint.transform);
         var carController = carObject.GetComponent<CarController>();
-        this.carController = carController;
         carController.SetParameter(carParameter);
         WheelController[] wheelControllers = carObject.GetComponentsInChildren<WheelController>();
         injectUI.Inject(carController,wheelControllers);
+        carEvent.Inject(carController);
+
         virtualCamera.Follow = carObject.transform;
         virtualCamera.LookAt = carObject.transform;
-        carReset.Inject(this.carController);
+
+        carReset.Inject(carController);
     }
 
-    public void RaceReadey()
-    {
-        carController.RaceReadey();
-    }
 
-    public void RaceStart()
-    {
-        carController.RaceStart();
-    }
-
-    public void RaceEnd()
-    {
-        carController.RaceEnd();
-    }
-
-    public void Pause()
-    {
-        carController.Pause();
-    }
-
-    public void PauseCancel()
-    {
-        carController.PauseCancel();
-    }
 }

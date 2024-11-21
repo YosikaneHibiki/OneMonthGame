@@ -11,7 +11,7 @@ public class AntiRollBar : MonoBehaviour
 
     void Start()
     {
-        car = GetComponent<Rigidbody>();
+        car = GetComponentInChildren<Rigidbody>();
     }
 
     void FixedUpdate()

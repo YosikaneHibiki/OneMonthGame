@@ -9,8 +9,6 @@ public enum GameType
 
 public class CarController : MonoBehaviour
 {
-    [SerializeField]
-    private CarID carID;
 
     private CarInputController inputController;
     private AudioSource audioSource;
@@ -44,7 +42,7 @@ public class CarController : MonoBehaviour
         audioManager = AudioManager.Instance;
         inputController = gameObject.GetComponent<CarInputController>();
         audioSource = gameObject.GetComponent<AudioSource>();
-        playerRB = gameObject.GetComponent<Rigidbody>();
+        playerRB = gameObject.GetComponentInChildren<Rigidbody>();
         audioManager.PlaySFX("15 EngA_06589", audioSource);
         MaxSpeed = carParameter.maxSpeed;
     }
@@ -132,7 +130,7 @@ public class CarController : MonoBehaviour
         UpdateWheel(colliders.RLWheel, wheelMeshes.RLWheel);
     }
 
-    private void UpdateWheel(WheelCollider coll, MeshRenderer wheelMesh)
+    private void UpdateWheel(WheelCollider coll, GameObject wheelMesh)
     {
         Quaternion quat;
         Vector3 position;
@@ -197,9 +195,9 @@ public class WheelColliders
 [System.Serializable]
 public class WheelMeshes
 {
-    public MeshRenderer FRWheel;
-    public MeshRenderer FLWheel;
-    public MeshRenderer RRWheel;
-    public MeshRenderer RLWheel;
+    public GameObject FRWheel;
+    public GameObject FLWheel;
+    public GameObject RRWheel;
+    public GameObject RLWheel;
 }
 

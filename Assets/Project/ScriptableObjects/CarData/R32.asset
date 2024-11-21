@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe1fb3e642595d4d8f9248c893806b5, type: 3}
+  m_Name: R32
+  m_EditorClassIdentifier: 
+  carID: {fileID: 11400000, guid: 7570dc506096a33449f8956052d83256, type: 2}
+  Name: R32GTR
+  motorPower: 1200
+  brakePower: 30000
+  maxSpeed: 240
+  steeringCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1.6411943
+      value: 59.862118
+      inSlope: -0.2894612
+      outSlope: -0.2894612
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 38.14947
+      value: 49.294388
+      inSlope: -0.6532989
+      outSlope: -0.6532989
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 93.40296
+      value: 36.629295
+      inSlope: -0.22921796
+      outSlope: -0.22921796
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CarPrefab: {fileID: 8100405980870663964, guid: 2e3ebf1df0a2afd4ea4f87b32bb6402b, type: 3}
+  Torque: 0.7
+  FrontTorque: 0.3
+  RiaTorque: 0.7
