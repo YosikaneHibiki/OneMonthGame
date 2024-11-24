@@ -1,15 +1,19 @@
+using Cysharp.Threading.Tasks;
+using MackySoft.Navigathena;
+using MackySoft.Navigathena.SceneManagement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
 
-public class DIScope : MonoBehaviour
+public class DIScope : SceneEntryPointBase
 {
     private CancellationTokenSource cancellationTokenSource;
     private CancellationToken cancellationToken;
     private RaceDomain raceDomain;
     private CarDataAccess carDataAccess;
-    private SceneLoadUnity sceneLoad;
+    private SceneLoadNavi loadNavi;
     private AudioDataAccess audioDataAccess;
 
     private IEnumerable<IRaceReady> raceReady;
@@ -35,10 +39,10 @@ public class DIScope : MonoBehaviour
     private GameManager gameManager;
     [SerializeField]
     private RaceStartPoint raceStartPoint;
-    [SerializeField]
-    private RaceEntoryPoint raceEntoryPoint;
 
-    private void Awake()
+    private string carID;
+
+    private void Seting()
     {
         cancellationTokenSource = new CancellationTokenSource();
         cancellationToken = cancellationTokenSource.Token;
@@ -47,7 +51,7 @@ public class DIScope : MonoBehaviour
         raceEnd = FindObjectsOfType<MonoBehaviour>().OfType<IRaceEnd>();
         racePause = FindObjectsOfType<MonoBehaviour>().OfType<IRacePause>();
         DIContainer();
-        raceEntoryPoint.Entory();
+        raceStartPoint.CreateCar(new(carID));
     }
 
     public void DIContainer()
@@ -55,10 +59,10 @@ public class DIScope : MonoBehaviour
         #region DI専用コンテナ
         audioDataAccess = new(audioDataBase);
         carDataAccess = new CarDataAccess(carDataBase);
-        sceneLoad = new SceneLoadUnity();
+        loadNavi = new SceneLoadNavi();
         raceDomain = new RaceDomain(cancellationToken, racePresenter,
         carReset, raceReady.ToList(), raceStart.ToList(), raceEnd.ToList());
-        sceneLoadGate.Inject(sceneLoad);
+        sceneLoadGate.Inject(loadNavi);
         raceManager.Inject(raceDomain, raceDomain);
         audioManager.Inject(audioDataAccess);
         gameManager.Inject(racePause.ToList());
@@ -71,5 +75,16 @@ public class DIScope : MonoBehaviour
         cancellationTokenSource?.Cancel();
         cancellationTokenSource?.Dispose();
         cancellationTokenSource = null;
+    }
+
+    protected override UniTask OnInitialize(ISceneDataReader reader, IProgress<IProgressDataStore> progress, CancellationToken cancellationToken)
+    {
+        if(reader.TryRead(out EntoryPointData entoryPointData))
+        {
+            carID = entoryPointData.carId;
+            Seting();
+        }
+
+        return base.OnInitialize(reader, progress, cancellationToken);
     }
 }

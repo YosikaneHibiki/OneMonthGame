@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TitleDIScope : MonoBehaviour
 {
-    private SceneLoadUnity sceneLoadUnity;
+    private SceneLoadNavi sceneLoadNavi;
     [SerializeField]
     private SceneLoadGate SceneLoadGate;
 
     private void Awake()
     {
-        sceneLoadUnity = new SceneLoadUnity();
-        SceneLoadGate.Inject(sceneLoadUnity);
+        sceneLoadNavi = new SceneLoadNavi();
+        SceneLoadGate.Inject(sceneLoadNavi);
     }
 }

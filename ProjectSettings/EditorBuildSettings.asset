@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/GameScene/TitleScene.unity
     guid: 7c50443196cb6304aa631a92e4b35fd1
+  - enabled: 1
+    path: Assets/Project/Scenes/DemoScene/FastScene.unity
+    guid: 12c47f3bf2b1cf04aa6d2f8da0916a1c
+  - enabled: 1
+    path: Assets/Project/Scenes/DemoScene/NextScene.unity
+    guid: 39676409c77205344b46b05e3a9a02c7
+  - enabled: 1
+    path: Assets/Project/Scenes/GameScene/LoadScene.unity
+    guid: cf6b79d75a8a1254587c459809f4a289
   m_configObjects: {}

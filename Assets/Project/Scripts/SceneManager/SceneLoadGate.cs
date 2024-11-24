@@ -30,6 +30,21 @@ public class SceneLoadGate : MonoBehaviour
         sceneLoad.SceneLoad(sceneName);
     }
 
+    public void SceneLoad(string sceneName, CarID carID)
+    {
+        sceneLoad.SceneLoad(sceneName, carID);
+    }
+
+    public void SceneLoadProgress(string sceneName , string loadSceneName)
+    {
+        sceneLoad.SceneLoadProgress(sceneName,loadSceneName);
+    }
+
+    public void SceneLoadProgress(string sceneName , string loadSceneName,CarID carID)
+    {
+        sceneLoad.SceneLoadProgress(sceneName, loadSceneName, carID);
+    }
+
     public void SceneReLoad()
     {
         sceneLoad.SceneReLoad();

@@ -2296,20 +2296,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &356022807380952330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719251512526170486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7607965f281ae3499f477fc22185f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPoint: {fileID: 1917393391166844696}
-  carID: {fileID: 11400000, guid: d069b20a628ab31448c376cee302364f, type: 2}
 --- !u!1 &370411119532177749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3365,21 +3351,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!4 &2225752311819204738
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719251512526170486}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 880.6716, y: 454.37067, z: -7.7187233}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2309629364776954144
 GameObject:
   m_ObjectHideFlags: 0
@@ -3581,23 +3552,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2719251512526170486
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2225752311819204738}
-  - component: {fileID: 356022807380952330}
-  m_Layer: 0
-  m_Name: GameEntoryPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!114 &2745060948061972506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6825,7 +6779,6 @@ MonoBehaviour:
   audioManager: {fileID: 6792961663659318262}
   gameManager: {fileID: 6974062761737969762}
   raceStartPoint: {fileID: 1917393391166844696}
-  raceEntoryPoint: {fileID: 356022807380952330}
 --- !u!222 &8888753365700953497
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7079,7 +7032,6 @@ SceneRoots:
   - {fileID: 9044866893904532052}
   - {fileID: 7496840517363755873}
   - {fileID: 5536089930631894225}
-  - {fileID: 2225752311819204738}
   - {fileID: 8539768403170978762}
   - {fileID: 7657448532642328858}
   - {fileID: 4414951915797343232}
