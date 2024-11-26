@@ -13,7 +13,8 @@ public class RaceManager : MonoBehaviour
 
 
     public void Inject(IRaceInput raceInput,ICheckpoint checkpoint)
-    { 
+    {
+        Debug.Log(2);
         this.raceInput = raceInput;
         this.checkpoint = checkpoint;
     }
@@ -30,8 +31,9 @@ public class RaceManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void GameRadey()
     {
+        Debug.Log(1);
         raceInput.GameRadey();
     }
 

@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.22
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -2486,7 +2486,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2550,7 +2550,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!224 &749164661810146544
@@ -3093,7 +3093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookTransform: {fileID: 4763493745721043654}
   startPoint: {fileID: 9120223244945688655}
-  carDefaltID: {fileID: 11400000, guid: 98562e5ec50dae94ca0488b2d9bd854c, type: 2}
+  carDefaltID: {fileID: 11400000, guid: 8451d74108868d845953e2dbf3b44398, type: 2}
   injectUI: {fileID: 5358420756076062847}
   virtualCamera: {fileID: 1979874367192030679}
   carReset: {fileID: 410024758667521184}
@@ -3826,8 +3826,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
+  m_sharedMaterial: {fileID: -4653926495823956789, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4557,8 +4557,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
+  m_sharedMaterial: {fileID: -4653926495823956789, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4582,8 +4582,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.43
-  m_fontSizeBase: 41.43
+  m_fontSize: 33.35
+  m_fontSizeBase: 33.35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4765,8 +4765,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
+  m_sharedMaterial: {fileID: -4653926495823956789, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4875,7 +4875,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7496840517363755873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &5570761832129243337
 CanvasRenderer:
@@ -5353,7 +5353,7 @@ Transform:
   m_GameObject: {fileID: 8570977737182289286}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 13.8, y: 1.58, z: -74.6}
+  m_LocalPosition: {x: 13.28, y: 1.58, z: -74.6}
   m_LocalScale: {x: 0.8200003, y: 7.3, z: 21.600002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5732,6 +5732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf256cbd8700f341bb684603003ea08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceBGM: {fileID: 0}
 --- !u!1 &6818080281010172853
 GameObject:
   m_ObjectHideFlags: 0
@@ -5760,9 +5761,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 429ba78baf0fb3d4dba5d76ffbad3cd0, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6044,6 +6045,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5536089930631894225}
+  - {fileID: 9120223244945688655}
   - {fileID: 3692945810317288224}
   - {fileID: 2493792313346773503}
   - {fileID: 23273276192139539}
@@ -6258,8 +6261,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
+  m_sharedMaterial: {fileID: -4653926495823956789, guid: 42d3cb45feb446242a2c9958a32a32af, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6779,6 +6782,7 @@ MonoBehaviour:
   audioManager: {fileID: 6792961663659318262}
   gameManager: {fileID: 6974062761737969762}
   raceStartPoint: {fileID: 1917393391166844696}
+  carID: 
 --- !u!222 &8888753365700953497
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7001,7 +7005,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4763493745721043654}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7496840517363755873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &9121077981831968567
 Transform:
@@ -7025,13 +7029,11 @@ SceneRoots:
   - {fileID: 2906335528968724100}
   - {fileID: 7711011398520444906}
   - {fileID: 9121077981831968567}
-  - {fileID: 9120223244945688655}
   - {fileID: 5842326009942240835}
   - {fileID: 5789551935039617908}
   - {fileID: 2910811078534542090}
   - {fileID: 9044866893904532052}
   - {fileID: 7496840517363755873}
-  - {fileID: 5536089930631894225}
   - {fileID: 8539768403170978762}
   - {fileID: 7657448532642328858}
   - {fileID: 4414951915797343232}

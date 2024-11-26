@@ -4,7 +4,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-
+    [SerializeField]
     private AudioSource audioSourceBGM;
 
     private IAudioRepository audioRepository;
@@ -24,12 +24,9 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-    }
-
-    private void Start()
-    {
         audioSourceBGM = GetComponentInChildren<AudioSource>();
     }
+
 
     public void PlayBGM(string bgmName)
     {

@@ -29,7 +29,7 @@ public class RaceStartPoint : MonoBehaviour
 
     public void CreateCar(string carId)
     {
-        if(carId == null)
+        if(carId == null || carId == string.Empty)
         {
             carId = carDefaltID.Id;
         }

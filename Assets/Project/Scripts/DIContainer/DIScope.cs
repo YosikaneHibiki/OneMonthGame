@@ -39,7 +39,7 @@ public class DIScope : SceneEntryPointBase
     private GameManager gameManager;
     [SerializeField]
     private RaceStartPoint raceStartPoint;
-
+    [SerializeField]
     private string carID;
 
     private void Seting()
@@ -52,6 +52,7 @@ public class DIScope : SceneEntryPointBase
         racePause = FindObjectsOfType<MonoBehaviour>().OfType<IRacePause>();
         DIContainer();
         raceStartPoint.CreateCar(new(carID));
+        raceManager.GameRadey();
     }
 
     public void DIContainer()
@@ -79,11 +80,11 @@ public class DIScope : SceneEntryPointBase
 
     protected override UniTask OnInitialize(ISceneDataReader reader, IProgress<IProgressDataStore> progress, CancellationToken cancellationToken)
     {
-        if(reader.TryRead(out EntoryPointData entoryPointData))
+        if (reader.TryRead(out EntoryPointData entoryPointData))
         {
             carID = entoryPointData.carId;
-            Seting();
         }
+        Seting();
 
         return base.OnInitialize(reader, progress, cancellationToken);
     }

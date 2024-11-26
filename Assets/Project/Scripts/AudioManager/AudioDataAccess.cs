@@ -16,6 +16,11 @@ public class AudioDataAccess : IAudioRepository
             .Where(audio => audio.name == bgmName)
             .FirstOrDefault();
 
+        if (clip == null)
+        {
+            throw new System.Exception("audioClipÇ™ë∂ç›ÇµÇ»Ç¢");
+        }
+
         return clip;
     }
 
@@ -25,6 +30,10 @@ public class AudioDataAccess : IAudioRepository
             .Where(audio => audio.name == sfxName)
             .FirstOrDefault();
 
+        if (clip == null)
+        {
+            throw new System.Exception("audioClipÇ™ë∂ç›ÇµÇ»Ç¢");
+        }
         return clip;
     }
 }

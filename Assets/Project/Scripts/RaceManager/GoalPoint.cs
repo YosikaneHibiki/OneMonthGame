@@ -7,6 +7,7 @@ public class GoalPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        AudioManager.Instance.StopBGM();
         raceManager.RaceGoal();
     }
 

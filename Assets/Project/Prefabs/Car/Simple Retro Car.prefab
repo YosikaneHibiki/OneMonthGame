@@ -86,17 +86,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2460c392c22ccbf46b28591a2b93da44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carID: {fileID: 11400000, guid: 98562e5ec50dae94ca0488b2d9bd854c, type: 2}
   colliders:
     FRWheel: {fileID: 6676918234391519359}
     FLWheel: {fileID: 5864899365606384500}
     RRWheel: {fileID: 3573958765351750443}
     RLWheel: {fileID: 7433186391329738130}
   wheelMeshes:
-    FRWheel: {fileID: 2477390721928939514}
-    FLWheel: {fileID: 7173002720995141455}
-    RRWheel: {fileID: 2856398239219536958}
-    RLWheel: {fileID: 8572556557649679496}
+    FRWheel: {fileID: 6266458929363416403}
+    FLWheel: {fileID: 4914357438343973625}
+    RRWheel: {fileID: 3112955578289352757}
+    RLWheel: {fileID: 3818673833820336530}
   gameType: 0
   slipAngle: 0
   speed: 0
