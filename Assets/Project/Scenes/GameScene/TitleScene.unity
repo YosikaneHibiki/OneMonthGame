@@ -3281,6 +3281,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 338861415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &669568570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669568571}
+  - component: {fileID: 669568572}
+  m_Layer: 0
+  m_Name: AudioMixer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &669568571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669568570}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &669568572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669568570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49c1f5b78d9ba9429e225c6f2ab0513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MasterSlider: {fileID: 691691502}
+  SFXSlider: {fileID: 1506271677}
+  BGMSlider: {fileID: 119866567}
 --- !u!1 &679352565
 GameObject:
   m_ObjectHideFlags: 0
@@ -3920,7 +3967,6 @@ GameObject:
   m_Component:
   - component: {fileID: 854357896}
   - component: {fileID: 854357897}
-  - component: {fileID: 854357898}
   - component: {fileID: 854357899}
   m_Layer: 5
   m_Name: AudioSettingUI
@@ -3975,21 +4021,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &854357898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854357895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e49c1f5b78d9ba9429e225c6f2ab0513, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MasterSlider: {fileID: 691691502}
-  SFXSlider: {fileID: 1506271677}
-  BGMSlider: {fileID: 119866567}
 --- !u!225 &854357899
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8675,3 +8706,4 @@ SceneRoots:
   - {fileID: 148380686}
   - {fileID: 140378993}
   - {fileID: 2060514519}
+  - {fileID: 669568571}

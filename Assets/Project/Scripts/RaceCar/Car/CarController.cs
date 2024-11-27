@@ -170,6 +170,7 @@ public class CarController : MonoBehaviour
 
     public void RaceEnd()
     {
+        audioSource.Stop();
         gameType = GameType.Goal;
     }
 

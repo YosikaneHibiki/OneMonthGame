@@ -54,13 +54,13 @@ public class EscapeMenu : MonoBehaviour , IRacePause
     {
         Debug.Log("Pause");
         menu.SetActive(true);
-        audioManager.VolumeChange(0.3f);
+        audioManager.VolumeChange(0.2f);
     }
 
     public void PauseCancel()
     {
         Debug.Log("UnPause");
-        audioManager.VolumeChange(1);
+        audioManager.VolumeChange(0.5f);
         menu.SetActive(false);
     }
 }

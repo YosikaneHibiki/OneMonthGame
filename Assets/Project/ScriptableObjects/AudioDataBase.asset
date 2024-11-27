@@ -15,8 +15,13 @@ MonoBehaviour:
   BGM:
   - {fileID: 8300000, guid: 429ba78baf0fb3d4dba5d76ffbad3cd0, type: 3}
   - {fileID: 8300000, guid: 6ba6aa03726097b4f861e3bb0b131b08, type: 3}
+  - {fileID: 8300000, guid: c06cb46e7d33baa4cb5ef6afa203c93a, type: 3}
   SFX:
   - {fileID: 8300000, guid: 6956fa90b7a9c1344aa84bf4ea1ad26d, type: 3}
   - {fileID: 8300000, guid: 409201a38f989f9428c423ebabacc73d, type: 3}
   - {fileID: 8300000, guid: ecfc1b2cd7a39f64c8834240207f4657, type: 3}
   - {fileID: 8300000, guid: ce1949c19345be0478927e70753d5b12, type: 3}
+  - {fileID: 8300000, guid: c21cf8e3839a25e449d6c91925ce2891, type: 3}
+  - {fileID: 8300000, guid: c21cf8e3839a25e449d6c91925ce2891, type: 3}
+  - {fileID: 8300000, guid: 927422170cc299746ae8f98a176e44fa, type: 3}
+  - {fileID: 8300000, guid: 4b62fc01bd7f6a7498110ded2bb0e317, type: 3}
