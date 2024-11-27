@@ -1,20 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SelectTimeAttack : MonoBehaviour
 {
     private CarID carID;
     private SceneLoadGate sceneLoadGate;
     private SceneID sceneName;
-    private AudioManager audioManager;
-    private AudioSource audioSource;
+    [SerializeField]
+    private AudioMixer audioMixer;
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        audioManager = AudioManager.Instance;
-    }
 
     public void SetCarData(BaseID carID)
     {
@@ -28,8 +24,7 @@ public class SelectTimeAttack : MonoBehaviour
 
     public void LoadTimeAttack()
     {
-        audioManager.PlaySFX("OpenUISFX", audioSource);
         sceneLoadGate = SceneLoadGate.Instance;
-        sceneLoadGate.SceneLoadProgress(sceneName.id,"LoadScene",carID);
+        sceneLoadGate.SceneLoadProgress(sceneName.id,"LoadScene",new EntoryPointData(carID.id,audioMixer));
     }
 }

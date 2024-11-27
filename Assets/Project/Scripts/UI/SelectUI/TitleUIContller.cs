@@ -6,10 +6,7 @@ using UnityEngine;
 
 public class TitleUIContller : MonoBehaviour
 {
-    [SerializeField]
-    private CanvasGroup menuActive;
-    [SerializeField]
-    private CanvasGroup titleMenu;
+
     [SerializeField]
     private CanvasEfect canvasEfect;
     private AudioManager audioManager;
@@ -21,18 +18,18 @@ public class TitleUIContller : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void MenuActive()
+    public void MenuActive(CanvasGroup OpenGroup,CanvasGroup CloseGroup)
     {
         audioManager.PlaySFX("OpenUISFX", audioSource);
-        canvasEfect.CloseEfect(titleMenu);
-        canvasEfect.OpenEfect(menuActive);
+        canvasEfect.CloseEfect(CloseGroup);
+        canvasEfect.OpenEfect(OpenGroup);
     }
 
-    public void MenuClose()
+    public void MenuClose(CanvasGroup OpenGroup,CanvasGroup CloseGroup)
     {
         audioManager.PlaySFX("CloseUISFX", audioSource);
-        canvasEfect.OpenEfect(titleMenu);
-        canvasEfect.CloseEfect(menuActive);
+        canvasEfect.OpenEfect(OpenGroup);
+        canvasEfect.CloseEfect(CloseGroup);
     }
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class TitleDIScope : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class TitleDIScope : MonoBehaviour
     private AudioManager audioManager;
     [SerializeField]
     private AudioDataBase audioDataBase;
+    [SerializeField]
+    private AudioMixer audioMixer;
 
     public void Awake()
     {
@@ -25,7 +28,7 @@ public class TitleDIScope : MonoBehaviour
         token = cancellationTokenSource.Token;
         audioDataAccess = new AudioDataAccess(audioDataBase);
         sceneLoadNavi = new SceneLoadNavi();
-        audioManager.Inject(audioDataAccess);
+        audioManager.Inject(audioDataAccess,audioMixer);
         SceneLoadGate.Inject(sceneLoadNavi);
         canvasEfect.Inject(token);
     }

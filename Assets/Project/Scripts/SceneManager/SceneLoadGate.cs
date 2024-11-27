@@ -40,9 +40,9 @@ public class SceneLoadGate : MonoBehaviour
         sceneLoad.SceneLoadProgress(sceneName,loadSceneName);
     }
 
-    public void SceneLoadProgress(string sceneName , string loadSceneName,CarID carID)
+    public void SceneLoadProgress(string sceneName , string loadSceneName,EntoryPointData entoryPointData)
     {
-        sceneLoad.SceneLoadProgress(sceneName, loadSceneName, carID);
+        sceneLoad.SceneLoadProgress(sceneName, loadSceneName, entoryPointData);
     }
 
     public void SceneReLoad()

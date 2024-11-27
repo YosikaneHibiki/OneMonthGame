@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class DIScope : SceneEntryPointBase
 {
@@ -42,6 +43,8 @@ public class DIScope : SceneEntryPointBase
     [SerializeField]
     private string carID;
 
+    private AudioMixer audioMixer;
+
     private void Seting()
     {
         cancellationTokenSource = new CancellationTokenSource();
@@ -65,7 +68,7 @@ public class DIScope : SceneEntryPointBase
         carReset, raceReady.ToList(), raceStart.ToList(), raceEnd.ToList());
         sceneLoadGate.Inject(loadNavi);
         raceManager.Inject(raceDomain, raceDomain);
-        audioManager.Inject(audioDataAccess);
+        audioManager.Inject(audioDataAccess, audioMixer);
         gameManager.Inject(racePause.ToList());
         raceStartPoint.Inject(carDataAccess);
         #endregion
@@ -83,6 +86,7 @@ public class DIScope : SceneEntryPointBase
         if (reader.TryRead(out EntoryPointData entoryPointData))
         {
             carID = entoryPointData.carId;
+            audioMixer = entoryPointData.audioMixer;
         }
         Seting();
 

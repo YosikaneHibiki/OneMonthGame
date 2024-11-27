@@ -29,11 +29,11 @@ public class SceneLoadNavi : ISceneLoadAdapter
         await GlobalSceneNavigator.Instance.Push(identifier, new SceneLoadDirector(loadIdentifier));
     }
 
-    public async UniTask SceneLoadProgress(string sceneName, string loadSceneName, CarID carID)
+    public async UniTask SceneLoadProgress(string sceneName, string loadSceneName, EntoryPointData entoryPointData)
     {
         var identifier = new BuiltInSceneIdentifier(sceneName);
         var loadIdentifier = new BuiltInSceneIdentifier(loadSceneName);
-        await GlobalSceneNavigator.Instance.Push(identifier, new SceneLoadDirector(loadIdentifier),data: new EntoryPointData(carID.Id));
+        await GlobalSceneNavigator.Instance.Push(identifier, new SceneLoadDirector(loadIdentifier),data: entoryPointData);
     }
 
     public void SceneReLoad()
